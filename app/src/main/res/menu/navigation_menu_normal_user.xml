@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addActorFragment"
+        android:title="@string/bottom_navigation_option_3"
+        android:icon="@drawable/account_plus"/>
+    <item
+        android:id="@+id/actorsFragment"
+        android:title="@string/bottom_navigation_option_4"
+        android:icon="@drawable/account_group"/>
+    <item
+        android:id="@+id/reportIssueFragment"
+        android:title="@string/bottom_navigation_option_5"
+        android:icon="@drawable/email_plus"/>
+    <item
+        android:id="@+id/userFragment"
+        android:title="@string/bottom_navigation_option_2"
+        android:icon="@drawable/account"/>
+</menu>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_super_user"
+    app:startDestination="@id/userFragment">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.oxymium.si2gassistant.features.userlogin.UserFragment"
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user"
+        >
+    </fragment>
+
+    <fragment
+        android:id="@+id/actorsFragment"
+        android:name="com.oxymium.si2gassistant.features.actors.ActorsFragment"
+        android:label="ActorsFragment"
+        tools:layout="@layout/fragment_actors"
+        >
+        <action
+            android:id="@+id/action_actorsFragment_to_modulesFragment"
+            app:destination="@id/modulesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/issuesFragment"
+        android:name="com.oxymium.si2gassistant.features.issues.IssuesFragment"
+        android:label="IssuesFragment"
+        tools:layout="@layout/fragment_issues"
+        >
+        <action
+            android:id="@+id/action_issuesFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/modulesFragment"
+        android:name="com.oxymium.si2gassistant.features.modules.ModulesFragment"
+        android:label="ModulesFragment"
+        tools:layout="@layout/fragment_modules"/>
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.oxymium.si2gassistant.features.overview.OverviewFragment"
+        android:label="OverviewFragment"
+        tools:layout="@layout/fragment_overview"/>
+
+    <fragment
+        android:id="@+id/issueFragment"
+        android:name="com.oxymium.si2gassistant.features.issue.IssueFragment"
+        android:label="IssueFragment"
+        tools:layout="@layout/fragment_issue"
+        />
+
+</navigation>

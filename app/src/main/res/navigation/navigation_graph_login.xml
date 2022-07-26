@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    android:id="@+id/navigation_graph_login"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.oxymium.si2gassistant.features.userlogin.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_graph_normal_user"
+            app:destination="@id/navigation_graph_normal_user" />
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_graph_super_user"
+            app:destination="@id/navigation_graph_super_user" />
+    </fragment>
+
+    <include app:graph="@navigation/navigation_graph_normal_user" />
+
+    <include app:graph="@navigation/navigation_graph_super_user" />
+
+</navigation>

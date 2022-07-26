@@ -1,3 +1,89 @@
 <resources>
     <string name="app_name">Si2G Assistant</string>
+
+    <!-- Navigation Menu -->
+    <string name="bottom_navigation_option_1">About</string>
+    <string name="bottom_navigation_option_2">Me</string>
+    <string name="bottom_navigation_option_3">Add Actor</string>
+    <string name="bottom_navigation_option_4">Actors</string>
+    <string name="bottom_navigation_option_5">Report Issue</string>
+    <string name="bottom_navigation_option_6">All Issues</string>
+    <string name="bottom_navigation_option_7">Overview</string>
+    <string name="bottom_navigation_option_8">Overview</string>
+
+
+    <!-- Login Fragment -->
+    <string name="fragment_login_button_hint">LOGIN</string>
+
+    <!-- User Fragment -->
+    <string name="fragment_user_date_hint">Day Month YYYY</string>
+    <string name="fragment_user_date">%s, %s %s %s</string>
+    <string name="fragment_user_greetings_hint"><i>Welcome</i>, \n <b>Name</b> <b>Firstname</b></string>
+    <string name="fragment_user_greetings"><i>Welcome</i>, \n <b>%s</b> <b>%s</b></string>
+    <string name="fragment_user_academy_hint">Academy</string>
+    <string name="fragment_user_button_hint">LOGOUT</string>
+
+    <!-- Add actor Fragment -->
+    <string name="fragment_add_actor_name_hint">Name</string>
+    <string name="fragment_add_actor_firstname_hint">Firstname</string>
+
+    <!-- Modules Fragment -->
+    <string name="fragment_modules_actor_academy_hint">Academy</string>
+    <string name="fragment_modules_actor_name_hint">Name</string>
+    <string name="fragment_modules_actor_firstname_hint">Firstname</string>
+
+    <!-- Report Issue Fragment -->
+    <string name="fragment_report_issue_description_hint">Describe your issue</string>
+    <string name="fragment_report_issue_button_hint">Upload status</string>
+    <string name="fragment_report_issue_ready">Ready to report</string>
+    <string name="fragment_report_issue_not_ready">Missing elements</string>
+
+    <!-- Actor item -->
+    <string name="item_actor_role_hint">Role</string>
+    <string name="item_actor_academy_hint">Academy</string>
+    <string name="item_actor_name_hint">Name</string>
+    <string name="item_actor_firstname_hint">Firstname</string>
+
+    <!-- Issue item -->
+    <string name="item_issue_id_hint"># N</string>
+    <string name="item_issue_date_hint">DD/MM/YYYY</string>
+    <string name="item_issue_id"># %s</string>
+    <string name="item_issue_date">%s.%s.%s</string>
+
+    <!-- Module item -->
+    <string name="item_module_id_hint"># N</string>
+
+    <!-- ImageView descriptions -->
+    <string name="logo_description">Logo</string>
+    <string name="login_decoration">Decoration</string>
+    <string name="login_button_description">Login</string>
+    <string name="logout_button_description">Logout</string>
+    <string name="module_document_description">Document</string>
+    <string name="item_decoration">Decoration</string>
+    <string name="item_actor_academy">Academy icon</string>
+
+    <!-- AlertDialog -->
+    <string name="alert_login_title">Welcome</string>
+    <string name="alert_login_message">Do you wish to login?</string>
+    <string name="alert_login_mail_hint">Mail</string>
+    <string name="alert_login_password_hint">Password</string>
+    <string name="alert_logout_title">Confirm</string>
+    <string name="alert_logout_message">Do you wish to logout?</string>
+    <string name="alert_role_title">Select a role</string>
+    <string name="alert_category_title">Select a category</string>
+    <string name="alert_add_actor_title">Add this actor?</string>
+    <string name="alert_report_issue_title">Report this issue?</string>
+
+    <string name="alert_negative">No</string>
+    <string name="alert_neutral">OK</string>
+    <string name="alert_positive">Yes</string>
+
+    <!-- Gravity levels -->
+    <string name="gravity_level_1">Level 1 - Weak </string>
+    <string name="gravity_level_2">Level 2 - Moderate</string>
+    <string name="gravity_level_3">Level 3 - Severe</string>
+
+    <!-- Picture description -->
+    <string name="corner_hexagonal_grid">Background grid</string>
+
 </resources>
