@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.FragmentIssuesBinding
+import com.oxymium.si2gassistant.model.IssuesSorting
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
+import com.oxymium.si2gassistant.utils.CustomLayoutManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class IssuesFragment: Fragment() {
 
     private val fragmentTAG = javaClass.simpleName
+
+    // RecyclerView Adapter
+    private lateinit var issuesAdapter: IssuesAdapter
 
     // DataBinding
     private lateinit var fragmentIssuesBinding: FragmentIssuesBinding
@@ -45,7 +50,21 @@ class IssuesFragment: Fragment() {
 
         fragmentIssuesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_issues, container, false)
         fragmentIssuesBinding.lifecycleOwner = activity
-        fragmentIssuesBinding.navigationViewModel = navigationViewModel
+
+        fragmentIssuesBinding.fragmentIssuesRecyclerView.layoutManager = CustomLayoutManager(context)
+
+        // Observe issue list
+        issuesViewModel.allIssues.observe(viewLifecycleOwner) { issues ->
+            issuesAdapter.submitList(issues)
+        }
+
+        // Pass listener to adapter
+        issuesAdapter = IssuesAdapter(
+            IssueListener {}
+        )
+
+        // Attach adapter to recyclerView
+        fragmentIssuesBinding.fragmentIssuesRecyclerView.adapter = issuesAdapter
 
         return binding.root
 

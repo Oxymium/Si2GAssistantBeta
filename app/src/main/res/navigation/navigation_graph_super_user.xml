@@ -14,6 +14,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/academiesFragment"
+        android:name="com.oxymium.si2gassistant.features.academies.AcademiesFragment"
+        android:label="AcademiesFragment"
+        tools:layout="@layout/fragment_academies">
+        <action
+            android:id="@+id/action_academiesFragment_to_actorsFragment"
+            app:destination="@id/actorsFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/actorsFragment"
         android:name="com.oxymium.si2gassistant.features.actors.ActorsFragment"
         android:label="ActorsFragment"

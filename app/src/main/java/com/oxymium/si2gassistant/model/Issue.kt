@@ -1,3 +1,20 @@
 package com.oxymium.si2gassistant.model
 
-data class Issue(val id: String?)
+import com.google.firebase.firestore.DocumentId
+
+// ----------------
+// ISSUE DATA CLASS
+// ----------------
+
+data class Issue(
+    @DocumentId
+    val id: String?,
+    val academy: String?,
+    val date: Long?,
+    val category: Int?,
+    val gravity: Int?,
+    val description: String?,
+    var solved: Boolean? = false)
+
+// EMPTY DATACLASS CONSTRUCTOR, REQUIRED FOR FIRESTORE DESERIALIZATION
+{ constructor() : this(null, null, null, null, null, null, null) }

@@ -17,8 +17,14 @@ class NavigationBinders {
 
             when (state){
                 0 -> bottomNavigationView.inflateMenu(R.menu.navigation_menu)
-                1 -> bottomNavigationView.inflateMenu(R.menu.navigation_menu_normal_user)
-                2 -> bottomNavigationView.inflateMenu(R.menu.navigation_menu_super_user)
+                1 -> {
+                    bottomNavigationView.inflateMenu(R.menu.navigation_menu_normal_user)
+                    //bottomNavigationView.selectedItemId = R.id.userFragment
+                }
+                2 -> {
+                    bottomNavigationView.inflateMenu(R.menu.navigation_menu_super_user)
+                    //bottomNavigationView.selectedItemId = R.id.userFragment
+                }
             }
 
         }

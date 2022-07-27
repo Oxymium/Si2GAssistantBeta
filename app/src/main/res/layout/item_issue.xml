@@ -1,0 +1,103 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="issue"
+            type="com.oxymium.si2gassistant.model.Issue"/>
+        <variable
+            name="issueListener"
+            type="com.oxymium.si2gassistant.features.issues.IssueListener"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{ () -> issueListener.onClickIssue(issue) }"
+        android:layout_marginStart="@dimen/items_margin"
+        android:layout_marginEnd="@dimen/items_margin"
+        android:layout_marginTop="@dimen/items_margin"
+        android:layout_marginBottom="@dimen/items_margin">
+
+        <!--  ISSUE ITEM - TOP  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_issue_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/item_issue_bottom">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  ISSUE ITEM - BOTTOM  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_issue_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/issue_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_issue_top"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/item_issue_gravity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/issue_yellow"
+            app:issueGravityColor="@{issue.gravity}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_issue_top"
+            app:layout_constraintBottom_toTopOf="@id/item_issue_bottom"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:textColor="@color/white"
+            android:textAlignment="textStart"
+            android:hint="@string/item_issue_id_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/item_issue_gravity"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/items_margin"
+            app:timeInMillisToDate="@{issue.date}"
+            android:textColor="@color/white"
+            android:textAlignment="textEnd"
+            android:hint="@string/item_issue_date_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_date_icon"/>
+
+        <ImageView
+            android:id="@+id/item_date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_issue_top"
+            app:layout_constraintBottom_toTopOf="@id/item_issue_bottom"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

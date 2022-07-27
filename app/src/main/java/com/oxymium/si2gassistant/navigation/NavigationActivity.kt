@@ -51,7 +51,29 @@ class NavigationActivity : AppCompatActivity() {
         // Misc.
         disableWindowAutoResizingWhenKeyboardCalled()
         hideSupportActionBar()
+
+        // Observers
+        observeNavigationState()
     }
+
+    // ---------
+    // OBSERVERS
+    // ---------
+
+    private fun observeNavigationState(){
+        navigationViewModel.navigationState.observe(this){
+            when (it){
+                // Login
+                0 -> { navigateToLoginFragment() }
+                // Normal User
+                1 -> { navigateToNormalUserNavigation() }
+                // Super User
+                2 -> { navigateToSuperUserNavigation() }
+            }
+        }
+    }
+
+
 
     // ----------
     // NAVIGATION
@@ -62,6 +84,16 @@ class NavigationActivity : AppCompatActivity() {
         bottomNavigationView = binding.bottomNavigation
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
     }
+
+    // ----------
+    // NAVIGATION
+    // ----------
+
+    private fun navigateToNormalUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_normal_user)
+    private fun navigateToSuperUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_super_user)
+    private fun navigateToLoginFragment() = navHostFragment.navController.popBackStack(R.id.loginFragment, false)
+    private fun navigateToModulesFragment() = navHostFragment.navController.navigate(R.id.action_actorsFragment_to_modulesFragment)
+    private fun navigateToIssueDetailsFragment() = navHostFragment.navController.navigate(R.id.action_issuesFragment_to_issueFragment)
 
     // --------------
     // MISC. ELEMENTS

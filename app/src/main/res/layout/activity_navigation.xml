@@ -4,7 +4,6 @@
     android:fitsSystemWindows="true">
 
     <data>
-
         <variable
             name="navigationViewModel"
             type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>

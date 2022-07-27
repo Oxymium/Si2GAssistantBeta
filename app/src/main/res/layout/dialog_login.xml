@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="navigationViewModel"
+            type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>
+        <variable
+            name="userLoginViewModel"
+            type="com.oxymium.si2gassistant.features.userlogin.UserLoginViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".login.LoginFragment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialog_login_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/email_outline"
+            app:startIconTint="@color/orange_700"
+            android:hint="@string/alert_login_mail_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={userLoginViewModel.mail}"
+                android:textColor="@color/orange_700"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialog_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/lock_outline"
+            app:startIconTint="@color/orange_700"
+            app:endIconMode="password_toggle"
+            android:hint="@string/alert_login_password_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_login_mail" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={userLoginViewModel.password}"
+                android:textColor="@color/orange_700"
+                android:textAlignment="textStart"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/testingButtonNu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> userLoginViewModel.loadNormalUser() }"
+            app:layout_constraintTop_toBottomOf="@id/dialog_login_password"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="NU"
+            />
+
+        <Button
+            android:id="@+id/testingButtonSu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> userLoginViewModel.loadSuperUser() }"
+            app:layout_constraintTop_toBottomOf="@id/testingButtonNu"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="SU"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
