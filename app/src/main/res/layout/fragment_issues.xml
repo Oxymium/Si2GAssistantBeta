@@ -1,18 +1,183 @@
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="issuesViewModel"
+            type="com.oxymium.si2gassistant.features.issues.IssuesViewModel"/>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_issues_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fragment_issues_quick_search_area">
+
+            <include
+                android:id="@+id/fragment_issues_results_include"
+                layout="@layout/layout_issues_results"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_issues_quick_search_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_issues_results"
+            app:layout_constraintBottom_toTopOf="@id/fragment_issues_search_buttons_areas"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_issues_quick_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:startIconTint="@color/orange_700"
+                android:hint="@string/fragment_academies_quick_search_hint"
+                app:hintTextColor="@color/orange_700"
+                app:startIconDrawable="@drawable/magnify"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_issues_quick_search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={issuesViewModel.quickSearchIssues}"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/item_curved_shape"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_issues_search_buttons_areas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:background="@color/pewter_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_issues_quick_search_area"
+            app:layout_constraintBottom_toTopOf="@id/fragment_issues_recyclerView"
+            >
+
+            <ImageButton
+                android:id="@+id/fragment_issues_not_fixed_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(1) }"
+                android:src="@drawable/bug_outline"
+                android:contentDescription="@string/fragment_issues_solved_issue_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fragment_issues_fixed_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <ImageButton
+                android:id="@+id/fragment_issues_fixed_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(2) }"
+                android:src="@drawable/bug_check_outline"
+                android:contentDescription="@string/fragment_issues_not_solved_description"
+                app:layout_constraintStart_toEndOf="@id/fragment_issues_not_fixed_button"
+                app:layout_constraintEnd_toStartOf="@id/fragment_issues_gravity_weak_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <ImageButton
+                android:id="@+id/fragment_issues_gravity_weak_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(1) }"
+                android:src="@drawable/circles_weak_check"
+                android:contentDescription="@string/fragment_issues_weak_description"
+                app:layout_constraintStart_toEndOf="@id/fragment_issues_fixed_button"
+                app:layout_constraintEnd_toStartOf="@id/fragment_issues_gravity_moderate_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <ImageButton
+                android:id="@+id/fragment_issues_gravity_moderate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(2) }"
+                android:src="@drawable/circles_moderate_check"
+                android:contentDescription="@string/fragment_issues_moderate_description"
+                app:layout_constraintStart_toEndOf="@id/fragment_issues_gravity_weak_button"
+                app:layout_constraintEnd_toStartOf="@id/fragment_issues_gravity_critical_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <ImageButton
+                android:id="@+id/fragment_issues_gravity_critical_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(3) }"
+                android:src="@drawable/circles_critical_check"
+                android:contentDescription="@string/fragment_issues_critical_description"
+                app:layout_constraintStart_toEndOf="@id/fragment_issues_gravity_moderate_button"
+                app:layout_constraintEnd_toStartOf="@id/fragment_issues_date_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <ImageButton
+                android:id="@+id/fragment_issues_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:dateSortingOrder="@{issuesViewModel.dateSortingState}"
+                android:onClick="@{ () -> issuesViewModel.onClickSortingDateButton() }"
+                android:src="@drawable/sort_calendar_ascending"
+                android:contentDescription="@string/fragment_issues_date_description"
+                app:layout_constraintStart_toEndOf="@id/fragment_issues_gravity_critical_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_issues_recyclerView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
             tools:listitem="@layout/item_issue"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_issues_search_buttons_areas"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -24,6 +24,8 @@ class NavigationViewModel: ViewModel() {
 
     val currentAcademy = MutableLiveData<Academy?>(null)
 
+    val selectedAcademy = MutableLiveData<Academy?>(null)
+
     val selectedIssue = MutableLiveData<Issue?>(null)
 
     val selectedActor = MutableLiveData<Actor?>(null)
@@ -63,6 +65,5 @@ class NavigationViewModel: ViewModel() {
     val logoutButtonClicked: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun onClickLogoutButton() { logoutButtonClicked.value = true }
-
 
 }

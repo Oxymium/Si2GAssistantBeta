@@ -1,0 +1,96 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="navigationViewModel"
+            type="com.oxymium.si2gassistant.navigation.NavigationViewModel" />
+        <variable
+            name="actorsViewModel"
+            type="com.oxymium.si2gassistant.features.actors.ActorsViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/items_margin"
+        android:layout_marginEnd="@dimen/items_margin"
+        android:layout_marginTop="@dimen/items_margin"
+        android:layout_marginBottom="@dimen/items_margin">
+
+        <!-- RESULTS ACTORS - TOP  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_actors_results_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/item_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_actors_results_bottom">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  RESULTS ACTORS - BOTTOM  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_actors_results_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_actors_results_top"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/layout_actors_results_actor_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/actor_hexagonal_variant"
+            android:contentDescription="@string/actor_hexagonal_variant_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_actors_results_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_actors_results_bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{navigationViewModel.selectedAcademy.location}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:hint="@string/fragment_actors_current_academy_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_actors_results_actor_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/layout_actors_results_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/fragment_actors_results(String.valueOf(actorsViewModel.filteredActors.size()))}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:hint="@string/fragment_actors_results_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/layout_actors_results_actor_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

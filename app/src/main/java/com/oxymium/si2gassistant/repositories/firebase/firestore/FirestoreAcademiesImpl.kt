@@ -28,4 +28,21 @@ class FirestoreAcademiesImpl(val firebaseFirestore: FirebaseFirestore): Academie
         emit(State.failed(it.message.toString()))
     }
 
+    override suspend fun getAllAcademies() = flow<State<List<Academy>>>{
+
+        // LOADING
+        emit(State.loading())
+
+        firebaseFirestore
+            .collection(ACADEMIES)
+            .get()
+            .await()
+            .toObjects(Academy::class.java)
+            .run { emit(State.success(this)) }
+
+    }.catch {
+        // FAILURE
+        emit(State.failed(it.message.toString()))
+    }
+
 }

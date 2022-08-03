@@ -8,9 +8,40 @@
     <string name="bottom_navigation_option_4">Actors</string>
     <string name="bottom_navigation_option_5">Report Issue</string>
     <string name="bottom_navigation_option_6">All Issues</string>
-    <string name="bottom_navigation_option_7">Overview</string>
+    <string name="bottom_navigation_option_7">Academies</string>
     <string name="bottom_navigation_option_8">Overview</string>
 
+    <!-- Academies Fragment -->
+    <string name="fragment_academies_results"><b>%1$s Academies</b></string>
+    <string name="fragment_academies_results_hint"><b>0 Academies</b></string>
+    <string name="fragment_academies_quick_search_hint"><i>ex: location, number</i></string>
+    <string name="fragment_academies_alphabetic_sort_button_description">Alphabetic sorting button</string>
+    <string name="fragment_academies_numeric_sort_button_description">Numeric sorting button</string>
+
+    <!-- Actors Fragment -->
+    <string name="fragment_actors_current_academy_hint"><b>Academy</b></string>
+    <string name="fragment_actors_results"><b>%1$s Actors</b></string>
+    <string name="fragment_actors_results_hint"><b>0 Actors</b></string>
+    <string name="fragment_actors_quick_search_hint"><i>ex: firstname, name, role</i></string>
+    <string name="fragment_actors_alphabetic_sort_button_description">Alphabetic sorting button</string>
+
+    <!-- Modules Fragment -->
+    <string name="fragment_modules_current_academy_hint"><b>Academy</b></string>
+    <string name="fragment_modules_results"><b>%1$s Modules</b></string>
+    <string name="fragment_modules_results_hint"><b>0 Modules</b></string>
+    <string name="fragment_modules_full_name">%1$s %2$s</string>
+    <string name="fragment_modules_full_name_hint">Firstname Name</string>
+
+    <!-- Hexagonal icons descriptions -->
+    <string name="academy_hexagonal_description">Academy hexagonal icon</string>
+    <string name="academy_hexagonal_variant_description">Academy hexagonal variant icon</string>
+    <string name="actor_hexagonal_description">Actor hexagonal icon</string>
+    <string name="actor_hexagonal_variant_description">Actor hexagonal variant icon</string>
+    <string name="module_hexagonal_description">Module hexagonal icon</string>
+    <string name="module_hexagonal_variant_description">Module hexagonal variant icon</string>
+    <string name="close_hexagonal_description">Close hexagonal icon</string>
+    <string name="check_hexagonal_description">Check hexagonal icon</string>
+    <string name="issue_hexagonal_variant_description">Issue hexagonal variant icon</string>
 
     <!-- Login Fragment -->
     <string name="fragment_login_button_hint">LOGIN</string>
@@ -38,17 +69,38 @@
     <string name="fragment_report_issue_ready">Ready to report</string>
     <string name="fragment_report_issue_not_ready">Missing elements</string>
 
+    <!-- Issues Fragment -->
+    <string name="fragment_issues_results"><b>%1$s Issues</b></string>
+    <string name="fragment_issues_results_hint"><b>0 Issues</b></string>
+    <string name="fragment_issues_solved_issue_description">Sort solved issues button</string>
+    <string name="fragment_issues_not_solved_description">Sort unsolved issues button</string>
+    <string name="fragment_issues_weak_description">Sort weak issues button</string>
+    <string name="fragment_issues_moderate_description">Sort moderate issues button</string>
+    <string name="fragment_issues_critical_description">Sort critical issues button</string>
+    <string name="fragment_issues_date_description">Sort issues by date button</string>
+    <string name="fragment_issues_date_hint"><b>00.00.0000</b></string>
+
+
+    <!-- Issue Fragment -->
+    <string name="fragment_issue_location_hint"><b>Location</b></string>
+    <string name="fragment_issue_date_hint"><b>00.00.0000</b></string>
+
     <!-- Actor item -->
     <string name="item_actor_role_hint">Role</string>
-    <string name="item_actor_academy_hint">Academy</string>
-    <string name="item_actor_name_hint">Name</string>
-    <string name="item_actor_firstname_hint">Firstname</string>
+    <string name="item_actor_full_name">%1$s, %2$s</string>
+    <string name="item_actor_full_name_hint">Firstname Name</string>
 
     <!-- Issue item -->
-    <string name="item_issue_id_hint"># N</string>
-    <string name="item_issue_date_hint">DD/MM/YYYY</string>
+    <string name="item_issue_academy_location_hint"><i>Location</i></string>
+    <string name="item_issue_category_hint">Category</string>
     <string name="item_issue_id"># %s</string>
     <string name="item_issue_date">%s.%s.%s</string>
+    <string name="item_issue_gravity_description">Circles gravity icon</string>
+
+    <!-- Academy item -->
+    <string name="item_academy_id_hint">#000</string>
+    <string name="item_academy_hexagonal_logo_description">Academy hexagonal logo</string>
+    <string name="item_academy_name_hint">Academy</string>
 
     <!-- Module item -->
     <string name="item_module_id_hint"># N</string>

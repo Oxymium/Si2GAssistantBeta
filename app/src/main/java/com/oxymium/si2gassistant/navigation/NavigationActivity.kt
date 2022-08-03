@@ -54,6 +54,10 @@ class NavigationActivity : AppCompatActivity() {
 
         // Observers
         observeNavigationState()
+
+        observeSelectedAcademy()
+        observeSelectedActor()
+        observeSelectedIssue()
     }
 
     // ---------
@@ -69,6 +73,33 @@ class NavigationActivity : AppCompatActivity() {
                 1 -> { navigateToNormalUserNavigation() }
                 // Super User
                 2 -> { navigateToSuperUserNavigation() }
+            }
+        }
+    }
+
+    // Handles navigation from Academies -> Actors
+    private fun observeSelectedAcademy(){
+        navigationViewModel.selectedAcademy.observe(this){
+            if (it != null) {
+                navigateToActorsFragment()
+            }
+        }
+    }
+
+    // Handles navigation from Actors -> Modules
+    private fun observeSelectedActor(){
+        navigationViewModel.selectedActor.observe(this){
+            if (it != null) {
+                navigateToModulesFragment()
+            }
+        }
+    }
+
+    // Handles navigation from Issues -> IssueDetails
+    private fun observeSelectedIssue(){
+        navigationViewModel.selectedIssue.observe(this){
+            if (it != null){
+                navigateToIssueDetailsFragment()
             }
         }
     }
@@ -92,8 +123,11 @@ class NavigationActivity : AppCompatActivity() {
     private fun navigateToNormalUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_normal_user)
     private fun navigateToSuperUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_super_user)
     private fun navigateToLoginFragment() = navHostFragment.navController.popBackStack(R.id.loginFragment, false)
-    private fun navigateToModulesFragment() = navHostFragment.navController.navigate(R.id.action_actorsFragment_to_modulesFragment)
     private fun navigateToIssueDetailsFragment() = navHostFragment.navController.navigate(R.id.action_issuesFragment_to_issueFragment)
+
+    private fun navigateToActorsFragment() = navHostFragment.navController.navigate(R.id.action_academiesFragment_to_actorsFragment)
+    private fun navigateToModulesFragment() = navHostFragment.navController.navigate(R.id.action_actorsFragment_to_modulesFragment)
+
 
     // --------------
     // MISC. ELEMENTS

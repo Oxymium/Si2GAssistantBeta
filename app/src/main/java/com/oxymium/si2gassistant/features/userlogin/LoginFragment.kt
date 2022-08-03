@@ -123,7 +123,11 @@ class LoginFragment: Fragment() {
         val positiveButtonClick = { _: DialogInterface, _: Int ->
             navigationViewModel.loginButtonClicked.value = false
             // Fetch FirebaseUser auth
-            userLoginViewModel.getAuthUid(userLoginViewModel.mail.value, userLoginViewModel.password.value)
+            if (userLoginViewModel.mail.value.isNullOrEmpty() || userLoginViewModel.password.value.isNullOrEmpty()){
+                userLoginViewModel.snackBarErrorMessage.value = "Cannot login with empty fields"
+            }else{
+                userLoginViewModel.getAuthUid(userLoginViewModel.mail.value, userLoginViewModel.password.value)
+            }
             Unit
         }
 
@@ -149,6 +153,5 @@ class LoginFragment: Fragment() {
             show()
         }
     }
-
 
 }

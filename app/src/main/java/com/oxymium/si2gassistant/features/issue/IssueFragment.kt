@@ -9,11 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.FragmentIssueBinding
-import com.oxymium.si2gassistant.databinding.FragmentIssuesBinding
-import com.oxymium.si2gassistant.features.issues.IssuesViewModel
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // ---------------
 // ISSUES FRAGMENT
@@ -29,8 +26,6 @@ class IssueFragment: Fragment() {
 
     // NavigationViewModel
     private val navigationViewModel by sharedViewModel<NavigationViewModel>()
-
-    private val issueViewModel by viewModel<IssueViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +43,7 @@ class IssueFragment: Fragment() {
         fragmentIssueBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
         fragmentIssueBinding.lifecycleOwner = activity
         fragmentIssueBinding.navigationViewModel = navigationViewModel
+        fragmentIssueBinding.fragmentIssueResultsInclude.navigationViewModel = navigationViewModel
 
         return binding.root
 

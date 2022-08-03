@@ -46,6 +46,7 @@ class OverviewFragment: Fragment() {
         fragmentOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
         fragmentOverviewBinding.lifecycleOwner = activity
         fragmentOverviewBinding.navigationViewModel = navigationViewModel
+        fragmentOverviewBinding.overviewViewModel = overviewViewModel
 
         return binding.root
 

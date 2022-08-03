@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="actorsViewModel"
+            type="com.oxymium.si2gassistant.features.actors.ActorsViewModel"/>
+        <variable
             name="navigationViewModel"
             type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>
     </data>
@@ -12,6 +15,92 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_actors_top_sorting_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fragment_actors_recyclerView"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_actors_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/items_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/fragment_actors_quick_search">
+
+                <include
+                    android:id="@+id/fragment_actors_results_include"
+                    layout="@layout/layout_actors_results"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_actors_quick_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginTop="@dimen/items_margin"
+                app:startIconTint="@color/orange_700"
+                android:hint="@string/fragment_actors_quick_search_hint"
+                app:hintTextColor="@color/orange_700"
+                app:startIconDrawable="@drawable/magnify"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fragment_actors_alphabetic_sorting_button"
+                app:layout_constraintTop_toBottomOf="@id/fragment_actors_results"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_actors_quick_search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/item_curved_shape"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/fragment_actors_alphabetic_sorting_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sort_alphabetical_ascending"
+                android:contentDescription="@string/fragment_actors_alphabetic_sort_button_description"
+                android:backgroundTint="@color/pewter_blue"
+                app:tint="@color/orange_700"
+                app:layout_constraintStart_toEndOf="@id/fragment_actors_quick_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_actors_quick_search"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_actors_quick_search"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_actors_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_actors_top_sorting_fields"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_actor"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.FragmentIssuesBinding
-import com.oxymium.si2gassistant.model.IssuesSorting
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
 import com.oxymium.si2gassistant.utils.CustomLayoutManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -51,23 +50,39 @@ class IssuesFragment: Fragment() {
         fragmentIssuesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_issues, container, false)
         fragmentIssuesBinding.lifecycleOwner = activity
 
+        fragmentIssuesBinding.issuesViewModel = issuesViewModel
+        fragmentIssuesBinding.fragmentIssuesResultsInclude.issuesViewModel = issuesViewModel
+
         fragmentIssuesBinding.fragmentIssuesRecyclerView.layoutManager = CustomLayoutManager(context)
 
         // Observe issue list
-        issuesViewModel.allIssues.observe(viewLifecycleOwner) { issues ->
+        issuesViewModel.filteredIssues.observe(viewLifecycleOwner) { issues ->
             issuesAdapter.submitList(issues)
         }
 
         // Pass listener to adapter
         issuesAdapter = IssuesAdapter(
-            IssueListener {}
+            IssueListener{
+                Log.d("Item issue:", "$it")
+                navigationViewModel.selectedIssue.value = it
+            }
         )
 
         // Attach adapter to recyclerView
         fragmentIssuesBinding.fragmentIssuesRecyclerView.adapter = issuesAdapter
 
+        observeIssuesQuickSearch()
+
         return binding.root
 
+    }
+
+    private fun observeIssuesQuickSearch(){
+        issuesViewModel.quickSearchIssues.observe(viewLifecycleOwner){
+            if (it != null){
+                issuesViewModel.quickSearchIssues(it)
+            }
+        }
     }
 
 }

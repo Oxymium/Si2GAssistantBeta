@@ -11,7 +11,6 @@ import com.oxymium.si2gassistant.model.User
 import com.oxymium.si2gassistant.repositories.AcademiesRepository
 import com.oxymium.si2gassistant.repositories.AuthRepository
 import com.oxymium.si2gassistant.repositories.UserRepository
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 // ---------------------
@@ -54,6 +53,7 @@ class UserLoginViewModel(val authRepository: AuthRepository, val userRepository:
                             auth.value = it.data }
                         is State.Failed -> {
                             Log.d("Auth:", "Failed!")
+                            snackBarErrorMessage.value = it.message
                         }
                     }
                 }
@@ -75,7 +75,6 @@ class UserLoginViewModel(val authRepository: AuthRepository, val userRepository:
                 is State.Failed -> {
                     Log.d("User:", "Failed!")
                     snackBarErrorMessage.value = it.message
-                    println(it.message)
                 }
             }
         }

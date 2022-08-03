@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.oxymium.si2gassistant.R
+import com.oxymium.si2gassistant.model.Issue
 import java.util.*
 
 // ------------
@@ -19,21 +20,23 @@ class IssueBinders {
         Color issue depending on gravity level
         1° Weak = yellow
         2° Moderate = orange
-        3° Severe = red
+        3° Critical = red
          */
         @JvmStatic
-        @BindingAdapter("app:issueGravityColor")
-        fun setGravityImageView(imageView: ImageView, priority: Int?) {
-            when (priority){
-                1 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.issue_yellow, null))
-                2 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.issue_orange, null))
-                3 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.issue_red, null))
-            }
-        }
+        @BindingAdapter("app:issueStatusImage")
+        fun setCirclesImageView(imageView: ImageView, issue: Issue?) {
 
-        @JvmStatic
-        @BindingAdapter("app:setIssueId")
-        fun setIssueIdTextView(textView: TextView, id: Int?) { textView.text = String.format(textView.context.getString(R.string.item_issue_id), id) }
+            if (issue?.solved == true){
+                if (issue.gravity == 1) { imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circles_weak_check, null)) }
+                if (issue.gravity == 2) { imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circles_moderate_check, null)) }
+                if (issue.gravity == 3) { imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circles_critical_check, null)) }
+            }else{
+                if (issue?.gravity == 1) { imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circles_weak_close, null)) }
+                if (issue?.gravity == 2) { imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circles_moderate_close, null)) }
+                if (issue?.gravity == 3) { imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circles_critical_close, null)) }
+            }
+
+        }
 
         // Convert timeInMillis to date dd/mm/yyyy
         @JvmStatic

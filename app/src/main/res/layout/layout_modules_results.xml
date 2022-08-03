@@ -1,0 +1,151 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="navigationViewModel"
+            type="com.oxymium.si2gassistant.navigation.NavigationViewModel" />
+        <variable
+            name="modulesViewModel"
+            type="com.oxymium.si2gassistant.features.modules.ModulesViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/items_margin"
+        android:layout_marginEnd="@dimen/items_margin"
+        android:layout_marginTop="@dimen/items_margin"
+        android:layout_marginBottom="@dimen/items_margin">
+
+        <!--  RESULTS MODULES - TOP FIRST -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_modules_results_top_first"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/item_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_top_second">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  RESULTS MODULES - TOP SECOND  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_modules_results_top_second"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_top_first"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_bottom_first">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  RESULTS MODULES - BOTTOM FIRST -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_modules_results_bottom_first"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/item_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_top_second"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_bottom_second">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  RESULTS - BOTTOM SECOND -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_modules_results_bottom_second"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_bottom_first"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  RESULTS MODULES: MODULES -->
+        <ImageView
+            android:id="@+id/layout_modules_results_module_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/module_hexagonal_variant"
+            android:contentDescription="@string/module_hexagonal_variant_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_top_first"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_top_second"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{navigationViewModel.selectedAcademy.location}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:hint="@string/fragment_modules_current_academy_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_modules_results_module_icon"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_top_first"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_top_second"/>
+
+        <TextView
+            android:id="@+id/layout_results"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/fragment_modules_results(String.valueOf(modulesViewModel.allModules.size()))}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:hint="@string/fragment_modules_results_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/layout_modules_results_module_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_top_first"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_top_second"/>
+
+        <!--  RESULTS MODULES: ACTOR -->
+        <ImageView
+            android:id="@+id/layout_modules_results_actor_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/actor_hexagonal_variant"
+            android:contentDescription="@string/actor_hexagonal_variant_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_modules_results_full_name"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_bottom_first"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_bottom_second"/>
+
+        <TextView
+            android:id="@+id/layout_modules_results_full_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/fragment_modules_full_name(navigationViewModel.selectedActor.firstName, navigationViewModel.selectedActor.name)}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:hint="@string/fragment_modules_full_name_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/layout_modules_results_actor_icon"
+            app:layout_constraintTop_toBottomOf="@id/layout_modules_results_actor_icon"
+            app:layout_constraintBottom_toTopOf="@id/layout_modules_results_actor_icon"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

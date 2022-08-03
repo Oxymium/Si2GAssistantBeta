@@ -13,14 +13,9 @@ import com.oxymium.si2gassistant.features.overview.OverviewViewModel
 import com.oxymium.si2gassistant.features.reportissue.ReportIssueViewModel
 import com.oxymium.si2gassistant.features.userlogin.UserLoginViewModel
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
-import com.oxymium.si2gassistant.repositories.AcademiesRepository
-import com.oxymium.si2gassistant.repositories.AuthRepository
-import com.oxymium.si2gassistant.repositories.IssuesRepository
-import com.oxymium.si2gassistant.repositories.UserRepository
+import com.oxymium.si2gassistant.repositories.*
 import com.oxymium.si2gassistant.repositories.firebase.auth.AuthImpl
-import com.oxymium.si2gassistant.repositories.firebase.firestore.FirestoreAcademiesImpl
-import com.oxymium.si2gassistant.repositories.firebase.firestore.FirestoreIssuesImpl
-import com.oxymium.si2gassistant.repositories.firebase.firestore.FirestoreUserImpl
+import com.oxymium.si2gassistant.repositories.firebase.firestore.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -36,13 +31,13 @@ val appModules = module {
     // ViewModels
     viewModel { NavigationViewModel() }
 
-    viewModel { AcademiesViewModel() }
-    viewModel { ActorsViewModel() }
+    viewModel { AcademiesViewModel( get() ) }
+    viewModel { ActorsViewModel( get() ) }
     viewModel { AddActorViewModel() }
     viewModel { IssueViewModel() }
     viewModel { IssuesViewModel( get() ) }
-    viewModel { ModulesViewModel() }
-    viewModel { OverviewViewModel() }
+    viewModel { ModulesViewModel( get() ) }
+    viewModel { OverviewViewModel( get(), get(), get()) }
     viewModel { ReportIssueViewModel() }
     viewModel { UserLoginViewModel( get(), get(), get() ) }
 
@@ -64,5 +59,7 @@ val appModules = module {
     single<IssuesRepository> { FirestoreIssuesImpl(firebaseFirestore = get() ) }
     single<UserRepository> { FirestoreUserImpl(firebaseFirestore = get() ) }
     single<AcademiesRepository> { FirestoreAcademiesImpl(firebaseFirestore = get() ) }
+    single<ActorsRepository> { FirestoreActorsImpl(firebaseFirestore = get() ) }
+    single<ModulesRepository> { FirestoreModulesImpl(firebaseFirestore = get() ) }
 
 }

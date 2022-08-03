@@ -9,12 +9,13 @@ import com.google.firebase.firestore.DocumentId
 data class Issue(
     @DocumentId
     val id: String?,
-    val academy: String?,
+    val academyId: String?,
+    val academyLocation: String?,
     val date: Long?,
-    val category: Int?,
+    val category: String?,
     val gravity: Int?,
     val description: String?,
     var solved: Boolean? = false)
 
 // EMPTY DATACLASS CONSTRUCTOR, REQUIRED FOR FIRESTORE DESERIALIZATION
-{ constructor() : this(null, null, null, null, null, null, null) }
+{ constructor() : this(null, null, null, null, null, null, null, null) }

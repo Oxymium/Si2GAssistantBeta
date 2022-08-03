@@ -110,6 +110,7 @@ class UserFragment: Fragment() {
             navigationViewModel.logoutButtonClicked.value = false
             // Back to Login screen by nullifying all persisting values
             userLoginViewModel.nullifyUserLoginValues()
+            navigationViewModel.nullifySharedDataValues()
             navigationViewModel.navigationState.value = 0
         }
 
