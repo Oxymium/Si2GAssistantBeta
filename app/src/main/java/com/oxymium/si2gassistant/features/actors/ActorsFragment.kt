@@ -76,6 +76,7 @@ class ActorsFragment: Fragment() {
         fragmentActorsBinding.fragmentActorsRecyclerView.adapter = actorsAdapter
 
         observeSelectedAcademy()
+        observeCurrentUser()
 
         return binding.root
 
@@ -85,6 +86,17 @@ class ActorsFragment: Fragment() {
         navigationViewModel.selectedAcademy.observe(viewLifecycleOwner){
             if (it != null){
                 lifecycleScope.launch { actorsViewModel.getActorsByAcademyId(it.id) }
+            }
+        }
+    }
+
+    // Normal user
+    private fun observeCurrentUser(){
+        navigationViewModel.currentUser.observe(viewLifecycleOwner){
+            if (it != null){
+                if (!it.superUser){
+                    lifecycleScope.launch { actorsViewModel.getActorsByAcademyId(it.academy) }
+                }
             }
         }
     }

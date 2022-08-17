@@ -4,11 +4,11 @@
 
     <data>
         <variable
-            name="issue"
-            type="com.oxymium.si2gassistant.model.Issue"/>
-        <variable
             name="issueListener"
             type="com.oxymium.si2gassistant.features.issues.IssueListener"/>
+        <variable
+            name="issue"
+            type="com.oxymium.si2gassistant.model.Issue"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,11 +29,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/item_issue_bottom">
+            app:layout_constraintBottom_toTopOf="@id/item_issue_bottom" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--  ISSUE ITEM - BOTTOM  -->
+        <!--  ISSUE ITEM - BOTTOM -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_issue_bottom"
             android:layout_width="match_parent"
@@ -42,72 +40,84 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_issue_top"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        <!--  GRAVITY INDICATION  -->
         <ImageView
-            android:id="@+id/item_issue_gravity"
+            android:id="@+id/item_issue_gravity_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/items_margin"
             android:layout_marginEnd="@dimen/items_margin"
             android:layout_marginTop="@dimen/items_margin"
             android:layout_marginBottom="@dimen/items_margin"
-            android:src="@drawable/circles_weak_check"
             app:issueStatusImage="@{issue}"
-            android:contentDescription="@string/item_issue_gravity_description"
+            android:src="@drawable/circles_moderate_check"
+            android:contentDescription="@string/module_hexagonal_description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/item_issue_academy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/items_margin"
-            android:text="@{issue.academyLocation}"
-            android:textColor="@color/white"
-            android:textStyle="italic"
-            android:textAlignment="center"
-            android:hint="@string/item_issue_academy_location_hint"
-            android:textColorHint="@color/white"
-            app:layout_constraintStart_toStartOf="@id/item_issue_top"
-            app:layout_constraintEnd_toEndOf="@id/item_issue_top"
-            app:layout_constraintTop_toTopOf="@id/item_issue_top"
-            app:layout_constraintBottom_toBottomOf="@id/item_issue_top"/>
-
-        <TextView
-            android:id="@+id/item_issue_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/items_margin"
-            android:text="@{issue.category}"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:hint="@string/item_issue_category_hint"
-            android:textColorHint="@color/white"
-            app:layout_constraintStart_toStartOf="@id/item_issue_bottom"
-            app:layout_constraintEnd_toEndOf="@id/item_issue_bottom"
-            app:layout_constraintTop_toBottomOf="@id/item_issue_bottom"
+            app:layout_constraintTop_toBottomOf="@id/item_issue_top"
             app:layout_constraintBottom_toTopOf="@id/item_issue_bottom"/>
 
+        <!--  CATEGORY -->
         <TextView
+            android:id="@+id/item_issue_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:text="@{issue.category}"
+            android:textColor="@color/white"
+            android:textAlignment="textStart"
+            android:hint="@string/item_issue_category_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/item_issue_gravity_icon"
+            app:layout_constraintTop_toTopOf="@id/item_issue_gravity_icon"
+            app:layout_constraintBottom_toBottomOf="@id/item_issue_gravity_icon"/>
+
+        <!--  DATE -->
+        <TextView
+            android:id="@+id/item_issue_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/items_margin"
             app:timeInMillisToDate="@{issue.date}"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textAlignment="textEnd"
             android:hint="@string/item_issue_date"
             android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_issue_category"
+            app:layout_constraintBottom_toBottomOf="@id/item_issue_category"
+            />
+
+        <!--  ACADEMY ICON  -->
+        <ImageView
+            android:id="@+id/item_issue_academy_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/academy_hexagonal"
+            android:contentDescription="@string/academy_hexagonal_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_issue_top"
             app:layout_constraintBottom_toTopOf="@id/item_issue_bottom"
+            />
+
+        <!--  ACADEMY  -->
+        <TextView
+            android:id="@+id/item_issue_academy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:text="@{issue.academyLocation}"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:hint="@string/item_issue_academy_location_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="@id/item_issue_academy_icon"
+            app:layout_constraintEnd_toEndOf="@id/item_issue_academy_icon"
+            app:layout_constraintTop_toBottomOf="@id/item_issue_academy_icon"
+            app:layout_constraintBottom_toBottomOf="@id/item_issue_bottom"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

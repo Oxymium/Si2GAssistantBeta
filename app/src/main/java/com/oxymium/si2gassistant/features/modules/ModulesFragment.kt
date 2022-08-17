@@ -61,7 +61,7 @@ class ModulesFragment: Fragment() {
         modulesAdapter = ModulesAdapter()
 
         // Observe issue list
-        modulesViewModel.allModules.observe(viewLifecycleOwner) {
+        modulesViewModel.finalModules.observe(viewLifecycleOwner) {
                 modules -> modulesAdapter.submitList(modules)
         }
 
@@ -88,7 +88,7 @@ class ModulesFragment: Fragment() {
     }
 
     private fun observeValidatedModules(){
-        modulesViewModel.validatedModules.observe(viewLifecycleOwner){
+        modulesViewModel.allModules.observe(viewLifecycleOwner){
             if (it != null){
                 modulesViewModel.updateAllModulesWithValidatedModules()
             }

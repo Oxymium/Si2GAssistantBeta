@@ -15,8 +15,12 @@ import kotlinx.coroutines.launch
 
 class ModulesViewModel(val modulesRepository: ModulesRepository): ViewModel() {
 
+    // All initial modules
     val allModules = MutableLiveData<List<Module>>()
+    // Values of modules that are validated
     val validatedModules = MutableLiveData<List<String>>()
+    // Final values to pass
+    val finalModules = MutableLiveData<List<Module>>()
 
     init { viewModelScope.launch { getAllModules() } }
 
@@ -37,7 +41,17 @@ class ModulesViewModel(val modulesRepository: ModulesRepository): ViewModel() {
     }
 
     fun updateAllModulesWithValidatedModules() {
-        allModules.value?.map { element1 -> validatedModules.value?.firstOrNull() { element1.validated == true } ?: element1 }
+
+            println("${allModules.value}")
+            println("${validatedModules.value}")
+
+        finalModules.value = allModules.value?.map{
+            if (validatedModules.value?.contains(it.id) == true) {
+                it.copy(validated = true)
+            }else{
+                it
+            }
+        }
     }
 
 }

@@ -20,7 +20,11 @@
         tools:layout="@layout/fragment_academies">
         <action
             android:id="@+id/action_academiesFragment_to_actorsFragment"
-            app:destination="@id/actorsFragment" />
+            app:destination="@id/actorsFragment"
+            app:enterAnim="@anim/together"
+            app:exitAnim="@anim/together"
+            app:popEnterAnim="@anim/together"
+            app:popExitAnim="@anim/together" />
     </fragment>
 
     <fragment

@@ -1,5 +1,6 @@
 package com.oxymium.si2gassistant.repositories
 
+import com.google.firebase.firestore.DocumentReference
 import com.oxymium.si2gassistant.model.Issue
 import com.oxymium.si2gassistant.model.State
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +11,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface IssuesRepository {
 
+    // Create new Issue
+    suspend fun createIssue(issue: Issue): Flow<State<DocumentReference>>
+
     // Query all issues
     suspend fun getAllIssues(): Flow<State<List<Issue>>>
 
+    // Query all issues from an Academy
+    suspend fun getAllIssuesByAcademy(academyId: String): Flow<State<List<Issue>>>
+
+    // Update
+    suspend fun updateIssue(documentId: String): Flow<State<Void>>
 }

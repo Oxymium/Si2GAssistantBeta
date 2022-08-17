@@ -1,0 +1,116 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="navigationViewModel"
+            type="com.oxymium.si2gassistant.navigation.NavigationViewModel" />
+        <variable
+            name="issuesViewModel"
+            type="com.oxymium.si2gassistant.features.issues.IssuesViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/items_margin"
+        android:layout_marginEnd="@dimen/items_margin"
+        android:layout_marginTop="@dimen/items_margin"
+        android:layout_marginBottom="@dimen/items_margin">
+
+        <!-- CONTENT ISSUE - TOP  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issue_content_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_issue_content_bottom"
+            >
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  CONTENT ISSUE - BOTTOM  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issue_content_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/item_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_issue_content_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_issue_content">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/layout_issue_gravity_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circles_weak_check"
+            app:issueStatusImage="@{navigationViewModel.selectedIssue}"
+            android:contentDescription="@string/issue_hexagonal_variant_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_issue_content_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_issue_content_bottom"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issue_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_margin="@dimen/items_margin"
+            android:background="@color/queen_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_issue_content_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/layout_issue_content_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{navigationViewModel.selectedIssue.category}"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:hint="@string/fragment_issue_category_hint"
+                android:textColorHint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layout_issue_content_description"
+                />
+
+            <TextView
+                android:id="@+id/layout_issue_content_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{navigationViewModel.selectedIssue.description}"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:hint="@string/fragment_issue_description_hint"
+                android:textColorHint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_issue_content_category"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

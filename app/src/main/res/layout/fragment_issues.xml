@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--  HEADER - RESULTS  -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_issues_results"
             android:layout_width="match_parent"
@@ -34,6 +35,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--  TEXT QUICK SEARCH  -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_issues_quick_search_area"
             android:layout_width="match_parent"
@@ -42,6 +44,7 @@
             android:layout_marginEnd="@dimen/items_margin"
             android:layout_marginTop="@dimen/items_margin"
             android:layout_marginBottom="@dimen/items_margin"
+            app:toggleIssuesSearchFieldVisibility="@{issuesViewModel.searchIssuesAreaState}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_issues_results"
@@ -76,6 +79,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--  BUTTONS AREA - 1  -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_issues_search_buttons_areas"
             android:layout_width="match_parent"
@@ -83,101 +87,50 @@
             android:layout_marginStart="@dimen/items_margin"
             android:layout_marginEnd="@dimen/items_margin"
             android:layout_marginBottom="@dimen/items_margin"
-            android:background="@color/pewter_blue"
+            app:toggleIssuesSearchFieldVisibility="@{issuesViewModel.searchIssuesAreaState}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_issues_quick_search_area"
-            app:layout_constraintBottom_toTopOf="@id/fragment_issues_recyclerView"
+            app:layout_constraintBottom_toTopOf="@id/fragment_issues_search_buttons_areas_2"
             >
 
-            <ImageButton
-                android:id="@+id/fragment_issues_not_fixed_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(1) }"
-                android:src="@drawable/bug_outline"
-                android:contentDescription="@string/fragment_issues_solved_issue_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/fragment_issues_fixed_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/fragment_issues_fixed_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(2) }"
-                android:src="@drawable/bug_check_outline"
-                android:contentDescription="@string/fragment_issues_not_solved_description"
-                app:layout_constraintStart_toEndOf="@id/fragment_issues_not_fixed_button"
-                app:layout_constraintEnd_toStartOf="@id/fragment_issues_gravity_weak_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/fragment_issues_gravity_weak_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(1) }"
-                android:src="@drawable/circles_weak_check"
-                android:contentDescription="@string/fragment_issues_weak_description"
-                app:layout_constraintStart_toEndOf="@id/fragment_issues_fixed_button"
-                app:layout_constraintEnd_toStartOf="@id/fragment_issues_gravity_moderate_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/fragment_issues_gravity_moderate_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(2) }"
-                android:src="@drawable/circles_moderate_check"
-                android:contentDescription="@string/fragment_issues_moderate_description"
-                app:layout_constraintStart_toEndOf="@id/fragment_issues_gravity_weak_button"
-                app:layout_constraintEnd_toStartOf="@id/fragment_issues_gravity_critical_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/fragment_issues_gravity_critical_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(3) }"
-                android:src="@drawable/circles_critical_check"
-                android:contentDescription="@string/fragment_issues_critical_description"
-                app:layout_constraintStart_toEndOf="@id/fragment_issues_gravity_moderate_button"
-                app:layout_constraintEnd_toStartOf="@id/fragment_issues_date_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/fragment_issues_date_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:dateSortingOrder="@{issuesViewModel.dateSortingState}"
-                android:onClick="@{ () -> issuesViewModel.onClickSortingDateButton() }"
-                android:src="@drawable/sort_calendar_ascending"
-                android:contentDescription="@string/fragment_issues_date_description"
-                app:layout_constraintStart_toEndOf="@id/fragment_issues_gravity_critical_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <include
+                android:id="@+id/fragment_issues_gravity_buttons_include"
+                layout="@layout/layout_issues_search"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--  BUTTONS AREA - 2  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_issues_search_buttons_areas_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:toggleIssuesSearchFieldVisibility="@{issuesViewModel.searchIssuesAreaState}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_issues_search_buttons_areas"
+            app:layout_constraintBottom_toTopOf="@id/fragment_issues_recyclerView"
+            >
+
+            <include
+                android:id="@+id/fragment_issues_gravity_buttons_2_include"
+                layout="@layout/layout_issues_search_secondary"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  RECYCLERVIEW - 1  -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_issues_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
             tools:listitem="@layout/item_issue"
-            app:layout_constraintTop_toBottomOf="@id/fragment_issues_search_buttons_areas"
+            app:layout_constraintTop_toBottomOf="@id/fragment_issues_search_buttons_areas_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

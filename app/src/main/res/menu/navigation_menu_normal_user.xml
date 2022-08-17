@@ -13,6 +13,10 @@
         android:title="@string/bottom_navigation_option_5"
         android:icon="@drawable/email_plus"/>
     <item
+        android:id="@+id/issuesFragment"
+        android:title="@string/bottom_navigation_option_6"
+        android:icon="@drawable/email_fast"/>
+    <item
         android:id="@+id/userFragment"
         android:title="@string/bottom_navigation_option_2"
         android:icon="@drawable/account"/>

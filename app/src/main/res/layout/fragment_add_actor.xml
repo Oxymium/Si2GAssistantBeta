@@ -1,17 +1,155 @@
-<layout
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="navigationViewModel"
             type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>
+        <variable
+            name="addActorViewModel"
+            type="com.oxymium.si2gassistant.features.addactor.AddActorViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".33"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:contentDescription="@string/corner_hexagonal_grid"
+                android:scaleX="-1"
+                android:scaleY="1"
+                android:src="@drawable/hexagonal_grid"
+                android:adjustViewBounds="true"
+                app:tint="@color/pewter_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_add_actor_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/fragment_add_actor_header_include"
+                layout="@layout/layout_add_actor_header"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_add_actor_firstname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginEnd="@dimen/items_margin"
+                android:layout_marginTop="@dimen/items_margin"
+                app:startIconTint="@color/orange_700"
+                android:hint="@string/fragment_add_actor_firstname_hint"
+                app:hintTextColor="@color/orange_700"
+                app:startIconDrawable="@drawable/alphabetical_variant"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_add_actor_header_include"
+                app:layout_constraintBottom_toTopOf="@id/fragment_add_actor_name"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_add_actor_firstname_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={addActorViewModel.firstname}"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/item_curved_shape"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_add_actor_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginEnd="@dimen/items_margin"
+                android:layout_marginTop="@dimen/items_margin"
+                app:startIconTint="@color/orange_700"
+                android:hint="@string/fragment_add_actor_name_hint"
+                app:hintTextColor="@color/orange_700"
+                app:startIconDrawable="@drawable/alphabetical_variant"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_add_actor_firstname"
+                app:layout_constraintBottom_toTopOf="@id/fragment_add_actor_role"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_add_actor_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={addActorViewModel.name}"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/item_curved_shape"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_add_actor_role"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginEnd="@dimen/items_margin"
+                android:layout_marginTop="@dimen/items_margin"
+                app:startIconTint="@color/orange_700"
+                android:hint="@string/fragment_add_actor_role_hint"
+                app:hintTextColor="@color/orange_700"
+                app:startIconDrawable="@drawable/cursor_default_click"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_add_actor_name"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_add_actor_role_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{ () -> addActorViewModel.onClickRoleField() }"
+                    android:text="@{addActorViewModel.role}"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/item_curved_shape"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

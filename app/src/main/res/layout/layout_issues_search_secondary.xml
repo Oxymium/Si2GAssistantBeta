@@ -1,0 +1,119 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="issuesViewModel"
+            type="com.oxymium.si2gassistant.features.issues.IssuesViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/items_margin"
+        android:layout_marginEnd="@dimen/items_margin"
+        android:layout_marginTop="@dimen/items_margin"
+        android:layout_marginBottom="@dimen/items_margin">
+
+        <!--  LAYOUT ISSUES SEARCH 2 - TOP  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issues_secondary_search_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_issues_secondary_search_bottom">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  LAYOUT ISSUES SEARCH 2 - BOTTOM  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issues_secondary_search_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/item_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_issues_secondary_search_top"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  VALIDATED ANY  -->
+        <ImageView
+            android:id="@+id/layout_issues_secondary_search_validated_any"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(0) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circle_check_and_close"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_issues_secondary_search_not_validated"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <!--  NOT VALIDATED  -->
+        <ImageView
+            android:id="@+id/layout_issues_secondary_search_not_validated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(1) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circle_close"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_secondary_search_validated_any"
+            app:layout_constraintTop_toTopOf="@id/layout_issues_secondary_search_validated_any"
+            app:layout_constraintBottom_toBottomOf="@id/layout_issues_secondary_search_validated_any"
+            app:layout_constraintEnd_toStartOf="@id/layout_issues_secondary_search_validated"
+            />
+
+        <!--  VALIDATED  -->
+        <ImageView
+            android:id="@+id/layout_issues_secondary_search_validated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingSolvedButton(2) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circle_check"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_secondary_search_not_validated"
+            app:layout_constraintTop_toTopOf="@id/layout_issues_secondary_search_not_validated"
+            app:layout_constraintBottom_toBottomOf="@id/layout_issues_secondary_search_not_validated"
+            app:layout_constraintEnd_toStartOf="@id/layout_issue_secondary_search_date"
+            />
+
+        <!--  DATE  -->
+        <ImageView
+            android:id="@+id/layout_issue_secondary_search_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingDateButton() }"
+            app:dateSortingOrder="@{issuesViewModel.dateSortingState}"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circle_calendar_descending"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_secondary_search_validated"
+            app:layout_constraintTop_toTopOf="@id/layout_issues_secondary_search_validated"
+            app:layout_constraintBottom_toBottomOf="@id/layout_issues_secondary_search_validated"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

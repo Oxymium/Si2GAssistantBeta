@@ -1,0 +1,119 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="issuesViewModel"
+            type="com.oxymium.si2gassistant.features.issues.IssuesViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/items_margin"
+        android:layout_marginEnd="@dimen/items_margin"
+        android:layout_marginTop="@dimen/items_margin"
+        android:layout_marginBottom="@dimen/items_margin">
+
+        <!--  LAYOUT ISSUES SEARCH - TOP  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issues_search_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_issues_search_bottom">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  LAYOUT ISSUES SEARCH - BOTTOM  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_issues_search_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/item_curved_shape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_issues_search_top"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--  ALL GRAVITIES -->
+        <ImageView
+            android:id="@+id/layout_issues_search_gravity_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(0) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circles_all"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_issues_search_gravity_weak"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <!--  GRAVITY: WEAK -->
+        <ImageView
+            android:id="@+id/layout_issues_search_gravity_weak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(1) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circles_weak"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_search_gravity_all"
+            app:layout_constraintTop_toTopOf="@id/layout_issues_search_gravity_all"
+            app:layout_constraintBottom_toBottomOf="@id/layout_issues_search_gravity_all"
+            app:layout_constraintEnd_toStartOf="@id/layout_issues_search_gravity_moderate"
+            />
+
+        <!--  GRAVITY: MODERATE -->
+        <ImageView
+            android:id="@+id/layout_issues_search_gravity_moderate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(2) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circles_moderate"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_search_gravity_weak"
+            app:layout_constraintTop_toTopOf="@id/layout_issues_search_gravity_weak"
+            app:layout_constraintBottom_toBottomOf="@id/layout_issues_search_gravity_weak"
+            app:layout_constraintEnd_toStartOf="@id/layout_issues_search_gravity_critical"
+            />
+
+        <!--  GRAVITY: CRITICAL -->
+        <ImageView
+            android:id="@+id/layout_issues_search_gravity_critical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSortingGravityButton(3) }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/circles_critical"
+            android:contentDescription="@string/item_issue_gravity_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_search_gravity_moderate"
+            app:layout_constraintTop_toTopOf="@id/layout_issues_search_gravity_moderate"
+            app:layout_constraintBottom_toBottomOf="@id/layout_issues_search_gravity_moderate"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

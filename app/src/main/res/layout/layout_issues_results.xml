@@ -77,6 +77,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
+        <ImageView
+            android:id="@+id/layout_issues_results_search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> issuesViewModel.onClickSearchButton() }"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:src="@drawable/search_hexagonal"
+            android:contentDescription="@string/issue_hexagonal_variant_description"
+            app:layout_constraintStart_toEndOf="@id/layout_issues_results_issue_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_issues_results_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_issues_results_bottom"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -1,6 +1,7 @@
 package com.oxymium.si2gassistant.utils
 
-import android.widget.ImageButton
+import android.view.View
+import android.widget.ImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.oxymium.si2gassistant.R
@@ -14,16 +15,31 @@ class IssuesBinders {
     companion object {
 
         /*
+        Toggle visibility of search field
+         */
+        @JvmStatic
+        @BindingAdapter("app:toggleIssuesSearchFieldVisibility")
+        fun toggleSearchFieldVisibility(view: View, state: Boolean) {
+            when (state){
+                // Hide
+                false -> view.visibility = View.GONE
+                // Display
+                true -> view.visibility = View.VISIBLE
+            }
+        }
+
+
+        /*
         Display ascending/descending icon according to state
          */
         @JvmStatic
         @BindingAdapter("app:dateSortingOrder")
-        fun setDateSortingImageView(imageButton: ImageButton, state: Int?) {
+        fun setDateSortingImageView(imageView: ImageView, state: Int?) {
             when (state){
                 // Default descending order
-                0 -> imageButton.setImageDrawable(ResourcesCompat.getDrawable(imageButton.resources, R.drawable.sort_calendar_descending, null))
+                0 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circle_calendar_descending, null))
                 // Ascending order
-                1 -> imageButton.setImageDrawable(ResourcesCompat.getDrawable(imageButton.resources, R.drawable.sort_calendar_ascending, null))
+                1 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circle_calendar_ascending, null))
             }
         }
     }

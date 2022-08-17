@@ -1,11 +1,14 @@
 package com.oxymium.si2gassistant.model
 
+import com.google.firebase.firestore.DocumentId
+
 // ----------------
 // ACTOR DATA CLASS
 // ----------------
 
 data class Actor(
-    val id: Int?,
+    @DocumentId
+    val id: String?,
     val name: String?,
     val firstName: String?,
     val role: String?,

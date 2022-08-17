@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="navigationViewModel"
+            type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>
+        <variable
+            name="addActorViewModel"
+            type="com.oxymium.si2gassistant.features.addactor.AddActorViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".login.LoginFragment">
+
+        <TextView
+            android:id="@+id/dialog_add_actor_firstname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{addActorViewModel.firstname}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:hint="@string/fragment_add_actor_firstname_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/dialog_add_actor_name"
+            />
+
+        <TextView
+            android:id="@+id/dialog_add_actor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{addActorViewModel.name}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:hint="@string/fragment_add_actor_name_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_add_actor_firstname"
+            app:layout_constraintBottom_toTopOf="@id/dialog_add_actor_role"
+            />
+
+        <TextView
+            android:id="@+id/dialog_add_actor_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{addActorViewModel.role}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:hint="@string/fragment_add_actor_role_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_add_actor_name"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

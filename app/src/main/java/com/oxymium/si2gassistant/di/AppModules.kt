@@ -33,12 +33,12 @@ val appModules = module {
 
     viewModel { AcademiesViewModel( get() ) }
     viewModel { ActorsViewModel( get() ) }
-    viewModel { AddActorViewModel() }
-    viewModel { IssueViewModel() }
+    viewModel { AddActorViewModel( get() ) }
+    viewModel { IssueViewModel( get() ) }
     viewModel { IssuesViewModel( get() ) }
     viewModel { ModulesViewModel( get() ) }
     viewModel { OverviewViewModel( get(), get(), get()) }
-    viewModel { ReportIssueViewModel() }
+    viewModel { ReportIssueViewModel( get() ) }
     viewModel { UserLoginViewModel( get(), get(), get() ) }
 
     // Firebase AUTH singleton

@@ -45,4 +45,22 @@
         tools:layout="@layout/fragment_report_issue"
         />
 
+    <fragment
+        android:id="@+id/issuesFragment"
+        android:name="com.oxymium.si2gassistant.features.issues.IssuesFragment"
+        android:label="IssuesFragment"
+        tools:layout="@layout/fragment_issues"
+        >
+        <action
+            android:id="@+id/action_issuesFragment_to_issueFragment2"
+            app:destination="@id/issueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/issueFragment"
+        android:name="com.oxymium.si2gassistant.features.issue.IssueFragment"
+        android:label="IssueFragment"
+        tools:layout="@layout/fragment_issue"
+        />
+
 </navigation>

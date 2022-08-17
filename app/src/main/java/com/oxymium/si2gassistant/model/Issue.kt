@@ -9,7 +9,7 @@ import com.google.firebase.firestore.DocumentId
 data class Issue(
     @DocumentId
     val id: String?,
-    val academyId: String?,
+    val academy: String?,
     val academyLocation: String?,
     val date: Long?,
     val category: String?,

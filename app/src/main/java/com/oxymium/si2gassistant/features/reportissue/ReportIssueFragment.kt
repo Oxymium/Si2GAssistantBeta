@@ -45,10 +45,13 @@ class ReportIssueFragment: Fragment() {
 
         fragmentReportIssueBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_report_issue, container, false)
         fragmentReportIssueBinding.lifecycleOwner = activity
+
+        fragmentReportIssueBinding.reportIssueViewModel = reportIssueViewModel
         fragmentReportIssueBinding.navigationViewModel = navigationViewModel
 
         return binding.root
 
-    }
+        }
+
 
 }
