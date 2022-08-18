@@ -46,7 +46,7 @@
             android:id="@+id/layout_report_issue_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{ () -> reportIssueViewModel.onCreateIssueButton() }"
+            android:onClick="@{ () -> reportIssueViewModel.onClickCreateIssueButton() }"
             android:layout_marginStart="@dimen/items_margin"
             android:layout_marginEnd="@dimen/items_margin"
             android:layout_marginTop="@dimen/items_margin"

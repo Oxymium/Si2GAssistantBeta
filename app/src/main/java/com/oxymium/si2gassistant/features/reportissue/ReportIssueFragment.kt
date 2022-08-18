@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.FragmentReportIssueBinding
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
@@ -48,10 +49,24 @@ class ReportIssueFragment: Fragment() {
 
         fragmentReportIssueBinding.reportIssueViewModel = reportIssueViewModel
         fragmentReportIssueBinding.navigationViewModel = navigationViewModel
+        fragmentReportIssueBinding.fragmentReportIssueHeaderInclude.reportIssueViewModel = reportIssueViewModel
+
+        // Copy current Academy
+        reportIssueViewModel.academy.value = navigationViewModel.currentAcademy.value
+
+        observeNotificationTrigger()
 
         return binding.root
 
         }
+
+    private fun observeNotificationTrigger(){
+        reportIssueViewModel.triggerCreatedIssueNotification.observe(viewLifecycleOwner){
+            if (it){
+                view?.let { view -> Snackbar.make(view, "Issue successfully pushed", Snackbar.LENGTH_LONG).show() }
+            }
+        }
+    }
 
 
 }
