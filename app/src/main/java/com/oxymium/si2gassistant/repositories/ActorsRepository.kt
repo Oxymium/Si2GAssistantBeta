@@ -13,6 +13,9 @@ interface ActorsRepository {
     // Get Actors by given Academy ID
     suspend fun getActorsByAcademyId(academyId: String?): Flow<State<List<Actor>>>
 
+    // Get an Actor
+    suspend fun getActorById(actorId: String): Flow<State<Actor?>>
+
     // Create an Actor
     suspend fun createActor(actor: Actor): Flow<State<DocumentReference>>
 

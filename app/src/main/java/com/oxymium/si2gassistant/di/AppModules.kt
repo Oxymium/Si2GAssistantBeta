@@ -36,7 +36,7 @@ val appModules = module {
     viewModel { AddActorViewModel( get() ) }
     viewModel { IssueViewModel( get() ) }
     viewModel { IssuesViewModel( get() ) }
-    viewModel { ModulesViewModel( get() ) }
+    viewModel { ModulesViewModel( get(), get() ) }
     viewModel { OverviewViewModel( get(), get(), get()) }
     viewModel { ReportIssueViewModel( get() ) }
     viewModel { UserLoginViewModel( get(), get(), get() ) }

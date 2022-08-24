@@ -20,7 +20,7 @@ class IssuesBinders {
         @JvmStatic
         @BindingAdapter("app:toggleIssuesSearchFieldVisibility")
         fun toggleSearchFieldVisibility(view: View, state: Boolean) {
-            when (state){
+            when (state) {
                 // Hide
                 false -> view.visibility = View.GONE
                 // Display
@@ -35,11 +35,23 @@ class IssuesBinders {
         @JvmStatic
         @BindingAdapter("app:dateSortingOrder")
         fun setDateSortingImageView(imageView: ImageView, state: Int?) {
-            when (state){
+            when (state) {
                 // Default descending order
-                0 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circle_calendar_descending, null))
+                0 -> imageView.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        imageView.resources,
+                        R.drawable.circle_calendar_descending,
+                        null
+                    )
+                )
                 // Ascending order
-                1 -> imageView.setImageDrawable(ResourcesCompat.getDrawable(imageView.resources, R.drawable.circle_calendar_ascending, null))
+                1 -> imageView.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        imageView.resources,
+                        R.drawable.circle_calendar_ascending,
+                        null
+                    )
+                )
             }
         }
     }

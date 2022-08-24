@@ -2,6 +2,9 @@ package com.oxymium.si2gassistant.features.addactor
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.drawable.Animatable2
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,13 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.DialogAddActorBinding
 import com.oxymium.si2gassistant.databinding.FragmentAddActorBinding
-import com.oxymium.si2gassistant.model.Actor
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -52,16 +53,39 @@ class AddActorFragment: Fragment() {
         fragmentAddActorBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_actor, container, false)
         fragmentAddActorBinding.lifecycleOwner = activity
 
-        fragmentAddActorBinding.navigationViewModel = navigationViewModel
         fragmentAddActorBinding.addActorViewModel = addActorViewModel
+
+        // Bind header, body & upload parts
         fragmentAddActorBinding.fragmentAddActorHeaderInclude.addActorViewModel = addActorViewModel
+        fragmentAddActorBinding.fragmentAddActorHeaderInclude.navigationViewModel = navigationViewModel
+        fragmentAddActorBinding.layoutAddActorBodyInclude.addActorViewModel = addActorViewModel
+        fragmentAddActorBinding.fragmentAddActorUploadInclude.addActorViewModel = addActorViewModel
+
+        // Copy current academy
+        addActorViewModel.academy.value = navigationViewModel.currentAcademy.value
+
+        // Sphere animation
+        val animatedSphere = fragmentAddActorBinding.fragmentAddActorUploadInclude.layoutAddActorCircle.drawable as AnimatedVectorDrawable
+        animatedSphere.start()
+        animatedSphere.registerAnimationCallback(
+            object : Animatable2.AnimationCallback(){
+                override fun onAnimationEnd(drawable: Drawable?) {
+                    fragmentAddActorBinding.fragmentAddActorUploadInclude.layoutAddActorCircle.post{ (fragmentAddActorBinding.fragmentAddActorUploadInclude.layoutAddActorCircle.drawable as AnimatedVectorDrawable).start() }
+                }
+            }
+        )
 
         observeAddActorButtonState()
         observeRoleFieldState()
+        observeNotificationTrigger()
 
         return binding.root
 
     }
+
+    // ---------
+    // OBSERVERS
+    // ---------
 
     private fun observeRoleFieldState(){
         addActorViewModel.roleFieldClickedState.observe(viewLifecycleOwner){
@@ -79,9 +103,23 @@ class AddActorFragment: Fragment() {
         }
     }
 
+    private fun observeNotificationTrigger(){
+        addActorViewModel.triggerCreatedActorNotification.observe(viewLifecycleOwner){
+            if (it) {
+                view?.let { view -> Snackbar.make(view, "New actor successfully pushed", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    // --------------
+    // DIALOG WINDOWS
+    // --------------
+
     private fun displayRoleDialog() {
 
-        val roles = arrayOf("Assistant", "Commercial", "Directeur opérationnel")
+        // Fetch roles array from res
+        val roles = resources.getStringArray(R.array.roles_array)
 
         val neutralButtonClick = { _: DialogInterface, _: Int -> addActorViewModel.roleFieldClickedState.value = false }
         val builder = AlertDialog.Builder(requireActivity(), R.style.AlertDialogStyle)
@@ -107,11 +145,7 @@ class AddActorFragment: Fragment() {
             addActorViewModel.addActorButtonClicked.value = false }
         val positiveButtonClick = { _: DialogInterface, _: Int ->
             addActorViewModel.addActorButtonClicked.value = false
-            // Push actor
-            lifecycleScope.launch{
-            addActorViewModel.createActor(Actor("", addActorViewModel.firstname.value, addActorViewModel.name.value, addActorViewModel.role.value, "", listOf()))
-                }
-            Unit
+            addActorViewModel.pushActor()
         }
 
         val builder = AlertDialog.Builder(requireActivity(), R.style.AlertDialogStyle)

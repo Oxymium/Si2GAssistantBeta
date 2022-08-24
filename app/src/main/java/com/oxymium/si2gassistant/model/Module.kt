@@ -9,9 +9,10 @@ import com.google.firebase.firestore.DocumentId
 data class Module(
     @DocumentId
     var id: String?,
+    var title: String?,
     var content: String?,
     var validated: Boolean?
     )
 
 // EMPTY DATACLASS CONSTRUCTOR, REQUIRED FOR FIRESTORE DESERIALIZATION
-{ constructor() : this(null, null,false) }
+{ constructor() : this(null, null, null,false) }

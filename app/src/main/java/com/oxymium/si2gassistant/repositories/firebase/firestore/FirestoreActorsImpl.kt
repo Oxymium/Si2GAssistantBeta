@@ -47,6 +47,24 @@ class FirestoreActorsImpl(val firebaseFirestore: FirebaseFirestore): ActorsRepos
     emit(State.failed(it.message.toString()))
 }
 
+    override suspend fun getActorById(actorId: String) = flow<State<Actor?>> {
+
+        // LOADING
+        emit(State.loading())
+
+        firebaseFirestore
+            .collection(ACTORS)
+            .document(actorId)
+            .get()
+            .await()
+            .toObject(Actor::class.java)
+            .run { emit(State.success(this)) }
+
+    }.catch{
+        //FAILURE
+        emit(State.failed(it.message.toString()))
+    }
+
     override suspend fun createActor(actor: Actor) = flow<State<DocumentReference>> {
 
         // UPLOADING

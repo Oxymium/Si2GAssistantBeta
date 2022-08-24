@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oxymium.si2gassistant.model.Module
 import com.oxymium.si2gassistant.model.State
+import com.oxymium.si2gassistant.repositories.ActorsRepository
 import com.oxymium.si2gassistant.repositories.ModulesRepository
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 // MODULES VIEW MODEL
 // ------------------
 
-class ModulesViewModel(val modulesRepository: ModulesRepository): ViewModel() {
+class ModulesViewModel(val modulesRepository: ModulesRepository, val actorsRepository: ActorsRepository): ViewModel() {
 
     // All initial modules
     val allModules = MutableLiveData<List<Module>>()
@@ -42,8 +43,8 @@ class ModulesViewModel(val modulesRepository: ModulesRepository): ViewModel() {
 
     fun updateAllModulesWithValidatedModules() {
 
-            println("${allModules.value}")
-            println("${validatedModules.value}")
+        println("${allModules.value}")
+        println("${validatedModules.value}")
 
         finalModules.value = allModules.value?.map{
             if (validatedModules.value?.contains(it.id) == true) {
@@ -53,5 +54,33 @@ class ModulesViewModel(val modulesRepository: ModulesRepository): ViewModel() {
             }
         }
     }
+
+    val moduleToUpdate = MutableLiveData<Module?>(null)
+
+    fun addActorValidatedModule(actorId: String?, moduleId: String?){
+        viewModelScope.launch {
+            actorsRepository.addValidatedActorModule(actorId ?: "", moduleId ?: "").collect {
+                when (it) {
+                    is State.Loading -> Log.d("Actor add modules:", "Uploading...")
+                    is State.Success -> Log.d("Actor add modules:", "Success!")
+                    is State.Failed -> Log.d("Actor add modules:", "Failure. $it")
+                }
+            }
+        }
+    }
+
+    fun removeActorValidatedModule(actorId: String?, moduleId: String?){
+        viewModelScope.launch {
+            actorsRepository.removeValidatedActorModules(actorId ?: "", moduleId ?: "").collect{
+                when (it){
+                    is State.Loading -> Log.d("Actor remove modules:", "Uploading...")
+                    is State.Success -> Log.d("Actor remove modules:", "Success!")
+                    is State.Failed -> Log.d("Actor remove modules:", "Failure. $it")
+                }
+            }
+        }
+
+    }
+
 
 }

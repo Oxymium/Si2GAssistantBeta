@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.ActivityNavigationBinding
@@ -29,6 +29,22 @@ class NavigationActivity : AppCompatActivity() {
     private val navHostFragment get() = supportFragmentManager.findFragmentById(R.id.navigationHostFragment) as NavHostFragment
     private lateinit var bottomNavigationView: BottomNavigationView
 
+    private val options = NavOptions.Builder()
+        .setLaunchSingleTop(true)
+        .setEnterAnim(R.anim.slide_in)
+        .setExitAnim(R.anim.fade_out)
+        .setPopEnterAnim(R.anim.fade_in)
+        .setPopExitAnim(R.anim.slide_out)
+        .build()
+
+    private val loginLogoutOptions = NavOptions.Builder()
+        .setLaunchSingleTop(true)
+        .setEnterAnim(R.anim.zoom_in)
+        .setExitAnim(R.anim.zoom_out)
+        .setPopEnterAnim(R.anim.zoom_in)
+        .setPopExitAnim(R.anim.zoom_out)
+        .build()
+
     // NavigationViewModel
     private val navigationViewModel by viewModel<NavigationViewModel>()
 
@@ -47,6 +63,9 @@ class NavigationActivity : AppCompatActivity() {
 
         binding.root.doOnPreDraw { initNavigationUI() }
         setContentView(binding.root)
+
+        bottomNavigationView = binding.bottomNavigation
+
 
         // Misc.
         disableWindowAutoResizingWhenKeyboardCalled()
@@ -97,14 +116,12 @@ class NavigationActivity : AppCompatActivity() {
 
     // Handles navigation from Issues -> IssueDetails
     private fun observeSelectedIssue(){
-        navigationViewModel.selectedIssue.observe(this){
+        navigationViewModel.selectedIssueId.observe(this){
             if (it != null){
                 navigateToIssueDetailsFragment()
             }
         }
     }
-
-
 
     // ----------
     // NAVIGATION
@@ -112,22 +129,44 @@ class NavigationActivity : AppCompatActivity() {
 
     // Navigation Component
     private fun initNavigationUI(){
-        bottomNavigationView = binding.bottomNavigation
-        NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                // Academies
+                R.id.academiesFragment -> navHostFragment.navController.navigate(R.id.academiesFragment, null, options)
+                // Overview
+                R.id.overviewFragment -> navHostFragment.navController.navigate(R.id.overviewFragment, null, options)
+                // Issues
+                R.id.issuesFragment -> navHostFragment.navController.navigate(R.id.issuesFragment, null, options)
+                // User
+                R.id.userFragment -> navHostFragment.navController.navigate(R.id.userFragment, null, options)
+                // ReportIssue
+                R.id.reportIssueFragment -> navHostFragment.navController.navigate(R.id.reportIssueFragment, null, options)
+                // AddActor
+                R.id.addActorFragment -> navHostFragment.navController.navigate(R.id.addActorFragment, null, options)
+                // Actors
+                R.id.actorsFragment -> navHostFragment.navController.navigate(R.id.actorsFragment, null, options)
+            }
+            true
+        }
     }
 
     // ----------
     // NAVIGATION
     // ----------
 
-    private fun navigateToNormalUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_normal_user)
-    private fun navigateToSuperUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_super_user)
-    private fun navigateToLoginFragment() = navHostFragment.navController.popBackStack(R.id.loginFragment, false)
-    private fun navigateToIssueDetailsFragment() = navHostFragment.navController.navigate(R.id.action_issuesFragment_to_issueFragment)
-
-    private fun navigateToActorsFragment() = navHostFragment.navController.navigate(R.id.action_academiesFragment_to_actorsFragment)
-    private fun navigateToModulesFragment() = navHostFragment.navController.navigate(R.id.action_actorsFragment_to_modulesFragment)
-
+    // NU navigation
+    private fun navigateToNormalUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_normal_user, null, loginLogoutOptions)
+    // SU navigation
+    private fun navigateToSuperUserNavigation() = navHostFragment.navController.navigate(R.id.action_loginFragment_to_navigation_graph_super_user, null, loginLogoutOptions)
+    // User -> Login
+    private fun navigateToLoginFragment() = navHostFragment.navController.popBackStack(R.id.loginFragment, false, )
+    // Issues -> Issue
+    private fun navigateToIssueDetailsFragment() = navHostFragment.navController.navigate(R.id.action_issuesFragment_to_issueFragment, null, options)
+    // Academies -> Actors
+    private fun navigateToActorsFragment() = navHostFragment.navController.navigate(R.id.action_academiesFragment_to_actorsFragment, null, options)
+    // Actors -> Modules
+    private fun navigateToModulesFragment() = navHostFragment.navController.navigate(R.id.action_actorsFragment_to_modulesFragment, null, options)
 
     // --------------
     // MISC. ELEMENTS

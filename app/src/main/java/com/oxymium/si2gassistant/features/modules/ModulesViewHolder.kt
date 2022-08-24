@@ -12,13 +12,16 @@ import com.oxymium.si2gassistant.model.Module
 
 class ModulesViewHolder(private val binding: ItemModuleBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(module: Module) {
+    fun bind(module: Module, moduleListener: ModuleListener, isSuperUser: Boolean) {
 
         // REQUIRED WITH DATA BINDING
         binding.executePendingBindings()
 
         // BIND DATA
         binding.module = module
+        binding.moduleListener = moduleListener
+        binding.isSuperUser = isSuperUser
+
     }
 
     companion object {

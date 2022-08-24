@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.oxymium.si2gassistant.model.Academy
 import com.oxymium.si2gassistant.model.Actor
-import com.oxymium.si2gassistant.model.Issue
 import com.oxymium.si2gassistant.model.User
 import java.util.*
 
@@ -26,7 +25,7 @@ class NavigationViewModel: ViewModel() {
 
     val selectedAcademy = MutableLiveData<Academy?>(null)
 
-    val selectedIssue = MutableLiveData<Issue?>(null)
+    val selectedIssueId = MutableLiveData<String?>(null)
 
     val selectedActor = MutableLiveData<Actor?>(null)
 

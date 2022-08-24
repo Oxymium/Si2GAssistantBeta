@@ -1,5 +1,7 @@
 package com.oxymium.si2gassistant.features.modules
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.FragmentModulesBinding
+import com.oxymium.si2gassistant.model.Module
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
 import com.oxymium.si2gassistant.utils.CustomLayoutManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -58,7 +61,13 @@ class ModulesFragment: Fragment() {
         fragmentModulesBinding.fragmentModulesRecyclerView.layoutManager = CustomLayoutManager(context)
 
         // Initialize adapter
-        modulesAdapter = ModulesAdapter()
+        modulesAdapter = ModulesAdapter(
+            navigationViewModel.currentUser.value?.superUser ?: false,
+            ModuleListener{
+                Log.d("Item module:", "$it")
+                modulesViewModel.moduleToUpdate.value = it
+            }
+        )
 
         // Observe issue list
         modulesViewModel.finalModules.observe(viewLifecycleOwner) {
@@ -72,6 +81,7 @@ class ModulesFragment: Fragment() {
 
         observeActorValidatedModules()
         observeValidatedModules()
+        observeClickedModuleId()
 
         return binding.root
 
@@ -93,5 +103,71 @@ class ModulesFragment: Fragment() {
                 modulesViewModel.updateAllModulesWithValidatedModules()
             }
         }
+    }
+
+    private fun observeClickedModuleId(){
+        modulesViewModel.moduleToUpdate.observe(viewLifecycleOwner){
+            if (it != null){
+                displayUpdateModuleDialog(it)
+            }
+        }
+    }
+
+    private fun displayUpdateModuleDialog(module: Module) {
+
+        when (module.validated){
+            true -> {
+
+                val negativeButtonClick = { _: DialogInterface, _: Int -> }
+                val positiveButtonClick = { _: DialogInterface, _: Int ->
+                    // Update module here
+                    modulesViewModel.removeActorValidatedModule(navigationViewModel.selectedActor.value?.id, module.id)
+                }
+
+                val builder = AlertDialog.Builder(requireActivity(), R.style.AlertDialogStyle)
+                with(builder)
+                {
+                    setTitle(String.format(getString(R.string.alert_module_update_title), module.id))
+                    setMessage(R.string.alert_module_update_uncheck_message)
+                    setNegativeButton(
+                        R.string.alert_negative,
+                        DialogInterface.OnClickListener(function = negativeButtonClick)
+                    )
+                    setPositiveButton(
+                        R.string.alert_positive,
+                        DialogInterface.OnClickListener(function = positiveButtonClick)
+                    )
+                    show()
+                }
+
+
+            }
+            false -> {
+
+                val negativeButtonClick = { _: DialogInterface, _: Int -> }
+                val positiveButtonClick = { _: DialogInterface, _: Int ->
+                    // Update module here
+                    modulesViewModel.addActorValidatedModule(navigationViewModel.selectedActor.value?.id, module.id)
+                }
+
+                val builder = AlertDialog.Builder(requireActivity(), R.style.AlertDialogStyle)
+                with(builder)
+                {
+                    setTitle(String.format(getString(R.string.alert_module_update_title), module.id))
+                    setMessage(R.string.alert_module_update_check_message)
+                    setNegativeButton(
+                        R.string.alert_negative,
+                        DialogInterface.OnClickListener(function = negativeButtonClick)
+                    )
+                    setPositiveButton(
+                        R.string.alert_positive,
+                        DialogInterface.OnClickListener(function = positiveButtonClick)
+                    )
+                    show()
+                }
+            }
+            else -> {}
+        }
+
     }
 }

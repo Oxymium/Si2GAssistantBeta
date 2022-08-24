@@ -59,6 +59,7 @@
                 android:hint="@string/fragment_academies_quick_search_hint"
                 app:hintTextColor="@color/orange_700"
                 app:startIconDrawable="@drawable/magnify"
+                app:boxStrokeWidth="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

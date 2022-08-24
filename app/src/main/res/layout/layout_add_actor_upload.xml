@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.text.TextUtils"/>
         <variable
-            name="issueViewModel"
-            type="com.oxymium.si2gassistant.features.issue.IssueViewModel"/>
+            name="addActorViewModel"
+            type="com.oxymium.si2gassistant.features.addactor.AddActorViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,89 +17,92 @@
         android:layout_marginTop="@dimen/items_margin"
         android:layout_marginBottom="@dimen/items_margin">
 
-        <!-- LAYOUT UPDATE ISSUE - TOP  -->
+        <!-- ADD ACTOR - TOP  -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_issue_update_top"
+            android:id="@+id/layout_add_actor_top"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/item_curved_shape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/layout_issue_update_bottom">
+            app:layout_constraintBottom_toTopOf="@id/layout_add_actor_bottom">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- LAYOUT UPDATE ISSUE - BOTTOM  -->
+        <!-- ADD ACTOR - BOTTOM  -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_issue_update_bottom"
+            android:id="@+id/layout_add_actor_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#00FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_issue_update_top"
+            app:layout_constraintTop_toBottomOf="@id/layout_add_actor_top"
             app:layout_constraintBottom_toBottomOf="parent">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/layout_issue_update_circle"
+            android:id="@+id/layout_add_actor_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/items_margin"
             android:layout_marginEnd="@dimen/items_margin"
             android:layout_marginTop="@dimen/items_margin"
             android:layout_marginBottom="@dimen/items_margin"
+            app:animateImageView="@{!TextUtils.isEmpty(addActorViewModel.name) &amp;&amp; !TextUtils.isEmpty(addActorViewModel.firstname) &amp;&amp; !TextUtils.isEmpty(addActorViewModel.role)}"
             android:src="@drawable/animated_sphere"
             app:tint="@color/queen_blue"
             android:contentDescription="@string/add_actor_hexagonal_variant_description"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_issue_update_top"
-            app:layout_constraintBottom_toTopOf="@id/layout_issue_update_bottom"/>
+            app:layout_constraintTop_toBottomOf="@id/layout_add_actor_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_add_actor_bottom"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{ () -> issueViewModel.onClickUpdateIssue() }"
-            android:src="@drawable/upload"
-            android:contentDescription="@string/fragment_report_issue_update_description"
+            app:toggleAddActorButton="@{addActorViewModel.actorCreationStatus}"
+            android:onClick="@{ () -> addActorViewModel.onClickAddActorButton() }"
+            android:src="@drawable/account_plus"
+            android:contentDescription="@string/fragment_add_actor_update_description"
             app:tint="@color/white"
             app:backgroundTint="@color/orange_700"
-            app:layout_constraintStart_toStartOf="@id/layout_issue_update_circle"
-            app:layout_constraintEnd_toEndOf="@id/layout_issue_update_circle"
-            app:layout_constraintTop_toTopOf="@id/layout_issue_update_circle"
-            app:layout_constraintBottom_toBottomOf="@id/layout_issue_update_circle"
+            app:layout_constraintStart_toStartOf="@id/layout_add_actor_circle"
+            app:layout_constraintEnd_toEndOf="@id/layout_add_actor_circle"
+            app:layout_constraintTop_toTopOf="@id/layout_add_actor_circle"
+            app:layout_constraintBottom_toBottomOf="@id/layout_add_actor_circle"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:displayAddActorText="@{!TextUtils.isEmpty(addActorViewModel.name) &amp;&amp; !TextUtils.isEmpty(addActorViewModel.firstname) &amp;&amp; !TextUtils.isEmpty(addActorViewModel.role)}"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:hint="@string/fragment_add_actor_upload_status_hint"
             android:textColorHint="@color/white"
-            app:layout_constraintStart_toStartOf="@id/layout_issue_update_top"
-            app:layout_constraintEnd_toStartOf="@id/layout_issue_update_circle"
-            app:layout_constraintTop_toTopOf="@id/layout_issue_update_top"
-            app:layout_constraintBottom_toBottomOf="@id/layout_issue_update_top"
+            app:layout_constraintStart_toStartOf="@id/layout_add_actor_top"
+            app:layout_constraintEnd_toStartOf="@id/layout_add_actor_circle"
+            app:layout_constraintTop_toTopOf="@id/layout_add_actor_top"
+            app:layout_constraintBottom_toBottomOf="@id/layout_add_actor_top"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:displayAddActorStatus="@{addActorViewModel.actorCreationStatus}"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:hint="@string/fragment_add_actor_upload_awaiting_hint"
             android:textColorHint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/layout_issue_update_circle"
-            app:layout_constraintTop_toBottomOf="@id/layout_issue_update_top"
-            app:layout_constraintBottom_toTopOf="@id/layout_issue_update_bottom"
+            app:layout_constraintEnd_toStartOf="@id/layout_add_actor_circle"
+            app:layout_constraintTop_toBottomOf="@id/layout_add_actor_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_add_actor_bottom"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

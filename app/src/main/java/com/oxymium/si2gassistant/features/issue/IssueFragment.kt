@@ -1,5 +1,7 @@
 package com.oxymium.si2gassistant.features.issue
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.oxymium.si2gassistant.R
 import com.oxymium.si2gassistant.databinding.FragmentIssueBinding
 import com.oxymium.si2gassistant.navigation.NavigationViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 // ---------------
@@ -51,23 +51,50 @@ class IssueFragment: Fragment() {
 
         fragmentIssueBinding.fragmentIssueResultsInclude.navigationViewModel = navigationViewModel
         fragmentIssueBinding.fragmentIssueContentInclude.navigationViewModel = navigationViewModel
+        fragmentIssueBinding.fragmentIssueContentInclude.issueViewModel = issueViewModel
         fragmentIssueBinding.fragmentIssueUpdateInclude.issueViewModel = issueViewModel
 
-        observeUpdateIssueStatus()
+        // Fetch Issue
+        navigationViewModel.selectedIssueId.value?.let { issueViewModel.getIssueById(it) }
+
+        observeDisplayDialogState()
 
         return binding.root
 
     }
 
-    private fun observeUpdateIssueStatus(){
+    private fun observeDisplayDialogState(){
         issueViewModel.issueUpdateClicked.observe(viewLifecycleOwner){
             if (it){
-                lifecycleScope.launch { navigationViewModel.selectedIssue.value?.id?.let { it1 ->
-                    issueViewModel.onClickUpdateIssue(
-                        it1
-                    )
-                } }
+                displayUpdateIssueDialog()
             }
+        }
+    }
+
+    private fun displayUpdateIssueDialog() {
+
+        val negativeButtonClick = { _: DialogInterface, _: Int ->
+            issueViewModel.issueUpdateClicked.value = false }
+        val positiveButtonClick = { _: DialogInterface, _: Int ->
+            issueViewModel.issueUpdateClicked.value = false
+            issueViewModel.issue.value?.id?.let { issueViewModel.onClickUpdateIssue(it) }
+            Unit
+        }
+
+        val builder = AlertDialog.Builder(requireActivity(), R.style.AlertDialogStyle)
+        with(builder)
+        {
+            setTitle(R.string.alert_report_issue_update_title)
+            setMessage(R.string.alert_report_issue_update_message)
+            setNegativeButton(
+                R.string.alert_negative,
+                DialogInterface.OnClickListener(function = negativeButtonClick)
+            )
+            setPositiveButton(
+                R.string.alert_positive,
+                DialogInterface.OnClickListener(function = positiveButtonClick)
+            )
+            show()
         }
     }
 

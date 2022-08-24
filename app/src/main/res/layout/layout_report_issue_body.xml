@@ -1,0 +1,190 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.text.TextUtils"/>
+        <variable
+            name="reportIssueViewModel"
+            type="com.oxymium.si2gassistant.features.reportissue.ReportIssueViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Category -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_report_issue_category_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_description_area"
+            >
+
+            <ImageButton
+                android:id="@+id/fragment_report_issue_category_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> reportIssueViewModel.onClickCategoryField() }"
+                android:src="@drawable/cursor_default_click"
+                android:contentDescription="@string/fragment_report_issue_select_category_description"
+                app:tint="@color/white"
+                android:backgroundTint="@color/orange_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fragment_report_issue_category"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_report_issue_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginEnd="@dimen/items_margin"
+                android:focusable="false"
+                android:hint="@string/fragment_issue_category_hint"
+                app:hintTextColor="@color/orange_700"
+                app:boxStrokeWidth="0dp"
+                app:layout_constraintStart_toEndOf="@id/fragment_report_issue_category_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_report_issue_category_button"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_report_issue_category_button"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_add_actor_category_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:text="@={reportIssueViewModel.category}"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:maxLines="5"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/item_curved_shape"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Description -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_report_issue_description_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_category_area"
+            app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_gravity_area"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_report_issue_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginEnd="@dimen/items_margin"
+                android:hint="@string/fragment_report_issue_description_hint"
+                app:hintTextColor="@color/orange_700"
+                app:boxStrokeWidth="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_report_issue_description_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={reportIssueViewModel.description}"
+                    android:textColor="@color/white"
+                    android:textAlignment="textStart"
+                    android:lines="3"
+                    android:inputType="textMultiLine"
+                    android:background="@color/pewter_blue"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Gravity -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_report_issue_gravity_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_description_area"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_report_issue_gravity_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/circles_weak"
+                app:gravityImageView="@{reportIssueViewModel.gravity}"
+                android:contentDescription="@string/item_issue_gravity_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fragment_report_issue_gravity_slider"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/fragment_report_issue_gravity_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/items_margin"
+                android:layout_marginEnd="@dimen/items_margin"
+                android:layout_marginTop="@dimen/items_margin"
+                android:layout_marginBottom="@dimen/items_margin"
+                android:value="@={reportIssueViewModel.gravity}"
+                android:valueFrom="1.0"
+                android:valueTo="3.0"
+                android:stepSize="1.0"
+                app:labelBehavior="gone"
+                android:background="@drawable/item_curved_shape"
+                app:layout_constraintStart_toEndOf="@id/fragment_report_issue_gravity_picture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/fragment_report_issue_gravity_picture"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_report_issue_gravity_picture"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:gravityTextDescription="@{reportIssueViewModel.gravity}"
+            android:textColor="@color/white"
+            android:textAlignment="textEnd"
+            android:hint="@string/fragment_report_issue_gravity_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_gravity_area"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

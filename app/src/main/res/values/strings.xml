@@ -41,6 +41,8 @@
     <string name="module_hexagonal_variant_description">Module hexagonal variant icon</string>
     <string name="close_hexagonal_description">Close hexagonal icon</string>
     <string name="check_hexagonal_description">Check hexagonal icon</string>
+    <string name="module_hexagonal_close_description">Module close hexagonal icon</string>
+    <string name="module_hexagonal_check_description">Module check hexagonal icon</string>
     <string name="issue_hexagonal_variant_description">Issue hexagonal variant icon</string>
     <string name="add_actor_hexagonal_variant_description">Add actor hexagonal variant icon</string>
     <string name="report_issue_hexagonal_variant_description">Report issue hexagonal variant icon</string>
@@ -60,7 +62,19 @@
     <string name="fragment_add_actor_title_hint"><b>Add Actor</b></string>
     <string name="fragment_add_actor_name_hint">Name</string>
     <string name="fragment_add_actor_firstname_hint">Firstname</string>
-    <string name="fragment_add_actor_role_hint">Select a role</string>
+    <string name="fragment_add_actor_role_hint">Role</string>
+    <string name="fragment_add_actor_academy_hint">Academy</string>
+
+    <string name="fragment_add_actor_upload_status_hint">Upload status</string>
+    <string name="fragment_add_actor_upload_ready_hint">Ready or not</string>
+    <string name="fragment_add_actor_upload_ready_negative">Missing elements</string>
+    <string name="fragment_add_actor_upload_ready_positive">Ready to upload</string>
+    <string name="fragment_add_actor_upload_awaiting_hint">Awaiting</string>
+    <string name="fragment_add_actor_upload_uploading">Uploading…</string>
+    <string name="fragment_add_actor_upload_successful">Actor successfully pushed</string>
+    <string name="fragment_add_actor_upload_failed">Error… something went wrong</string>
+    <string name="fragment_add_actor_update_description">Update button</string>
+    <string name="fragment_add_actor_select_role_description">Update button</string>
 
     <!-- Modules Fragment -->
     <string name="fragment_modules_actor_academy_hint">Academy</string>
@@ -74,6 +88,10 @@
     <string name="fragment_report_issue_button_hint">Upload status</string>
     <string name="fragment_report_issue_ready">Ready to report</string>
     <string name="fragment_report_issue_not_ready">Missing elements</string>
+    <string name="fragment_report_issue_academy_hint">Academy</string>
+    <string name="fragment_report_issue_gravity_hint">Gravity</string>
+    <string name="fragment_report_issue_select_category_description">Select category button</string>
+    <string name="fragment_report_issue_update_description">Update button</string>
 
     <!-- Issues Fragment -->
     <string name="fragment_issues_results"><b>%1$s Issues</b></string>
@@ -89,7 +107,7 @@
     <!-- Issue Fragment -->
     <string name="fragment_issue_location_hint"><b>Location</b></string>
     <string name="fragment_issue_date_hint"><b>00.00.0000</b></string>
-    <string name="fragment_issue_category_hint"><b>Category</b></string>
+    <string name="fragment_issue_category_hint">Category</string>
     <string name="fragment_issue_description_hint">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
     <!-- Actor item -->
@@ -132,17 +150,48 @@
     <string name="alert_category_title">Select a category</string>
     <string name="alert_add_actor_title">Add this actor?</string>
     <string name="alert_report_issue_title">Report this issue?</string>
+    <string name="alert_report_issue_academy_hint">Academy</string>
+    <string name="alert_report_issue_category_hint">Category</string>
+    <string name="alert_report_issue_gravity_hint">Gravity</string>
+    <string name="alert_report_issue_description_hint">Description</string>
+    <string name="alert_report_issue_update_title">Update Issue</string>
+    <string name="alert_report_issue_update_message">Do you wish to set this Issue as RESOLVED?</string>
+    <string name="alert_add_actor_update_title">Update Actor</string>
+
+    <string name="alert_module_update_title">Module %s</string>
+    <string name="alert_module_update_check_message">"Are you sure you wish to 「VALIDATE」 this module?"</string>
+    <string name="alert_module_update_uncheck_message">"Are you sure you wish to 「INVALIDATE」 this module?"</string>
 
     <string name="alert_negative">No</string>
     <string name="alert_neutral">OK</string>
     <string name="alert_positive">Yes</string>
 
     <!-- Gravity levels -->
-    <string name="gravity_level_1">Level 1 - Weak </string>
-    <string name="gravity_level_2">Level 2 - Moderate</string>
-    <string name="gravity_level_3">Level 3 - Severe</string>
+    <string name="gravity_level_1">Level 1… Weak </string>
+    <string name="gravity_level_2">Level 2… Moderate</string>
+    <string name="gravity_level_3">Level 3… Critical</string>
 
     <!-- Picture description -->
     <string name="corner_hexagonal_grid">Background grid</string>
+
+    <!-- Roles array -->
+    <array name="roles_array">
+        <item>Chef d\'établissement support</item>
+        <item>Directeur opérationnel</item>
+        <item>Assistance administrative</item>
+        <item>Conseiller en formation continue</item>
+        <item>Assistant commercial</item>
+        <item>Coordonnateur</item>
+        <item>Assistant de coordination</item>
+        <item>Formateur</item>
+    </array>
+
+    <!-- Categories array -->
+    <array name="categories_array">
+        <item>Interface</item>
+        <item>Typography</item>
+        <item>Miscellaneous</item>
+    </array>
+
 
 </resources>

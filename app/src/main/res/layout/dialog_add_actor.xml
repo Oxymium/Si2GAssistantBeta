@@ -18,6 +18,21 @@
         tools:context=".login.LoginFragment">
 
         <TextView
+            android:id="@+id/dialog_add_actor_academy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{addActorViewModel.academy.fullTitle}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:hint="@string/item_issue_academy_location_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/dialog_add_actor_firstname"
+            />
+
+        <TextView
             android:id="@+id/dialog_add_actor_firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +43,7 @@
             android:textColorHint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_add_actor_academy"
             app:layout_constraintBottom_toTopOf="@id/dialog_add_actor_name"
             />
 

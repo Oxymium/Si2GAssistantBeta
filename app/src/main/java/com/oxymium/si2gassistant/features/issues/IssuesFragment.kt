@@ -68,7 +68,7 @@ class IssuesFragment: Fragment() {
         issuesAdapter = IssuesAdapter(
             IssueListener{
                 Log.d("Item issue:", "$it")
-                navigationViewModel.selectedIssue.value = it
+                navigationViewModel.selectedIssueId.value = it.id
             }
         )
 

@@ -7,9 +7,6 @@
         <variable
             name="reportIssueViewModel"
             type="com.oxymium.si2gassistant.features.reportissue.ReportIssueViewModel"/>
-        <variable
-            name="navigationViewModel"
-            type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,52 +44,63 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/layout_report_issue_icon"
+            android:id="@+id/layout_report_issue_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:animateImageView="@{!TextUtils.isEmpty(reportIssueViewModel.category) &amp;&amp; !TextUtils.isEmpty(reportIssueViewModel.description) }"
             android:layout_marginStart="@dimen/items_margin"
             android:layout_marginEnd="@dimen/items_margin"
             android:layout_marginTop="@dimen/items_margin"
             android:layout_marginBottom="@dimen/items_margin"
-            android:src="@drawable/issue_report_hexagonal_variant"
-            android:contentDescription="@string/report_issue_hexagonal_variant_description"
-            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/animated_sphere"
+            app:tint="@color/queen_blue"
+            android:contentDescription="@string/add_actor_hexagonal_variant_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_report_issue_top"
             app:layout_constraintBottom_toTopOf="@id/layout_report_issue_bottom"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:toggleReportIssueButton="@{reportIssueViewModel.issueCreationState}"
+            android:onClick="@{ () -> reportIssueViewModel.onClickReportIssueButton() }"
+            android:src="@drawable/email_plus"
+            android:contentDescription="@string/fragment_report_issue_update_description"
+            app:tint="@color/white"
+            app:backgroundTint="@color/orange_700"
+            app:layout_constraintStart_toStartOf="@id/layout_report_issue_circle"
+            app:layout_constraintEnd_toEndOf="@id/layout_report_issue_circle"
+            app:layout_constraintTop_toTopOf="@id/layout_report_issue_circle"
+            app:layout_constraintBottom_toBottomOf="@id/layout_report_issue_circle"
+            />
+
         <TextView
-            android:id="@+id/layout_report_issue_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textAlignment="center"
-            android:textStyle="bold"
-            android:hint="@string/fragment_report_issue_title_hint"
+            android:hint="@string/fragment_add_actor_upload_status_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="@id/layout_report_issue_top"
+            app:layout_constraintEnd_toStartOf="@id/layout_report_issue_circle"
+            app:layout_constraintTop_toTopOf="@id/layout_report_issue_top"
+            app:layout_constraintBottom_toBottomOf="@id/layout_report_issue_top"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:displayReportIssueStatus="@{reportIssueViewModel.issueCreationState}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:hint="@string/fragment_add_actor_upload_awaiting_hint"
             android:textColorHint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/layout_report_issue_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_report_issue_circle"
+            app:layout_constraintTop_toBottomOf="@id/layout_report_issue_top"
+            app:layout_constraintBottom_toTopOf="@id/layout_report_issue_bottom"
             />
-
-        <TextView
-            android:id="@+id/layout_report_issue_academy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{navigationViewModel.currentAcademy.location}"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:hint="@string/fragment_report_issue_academy_hint"
-            android:textColorHint="@color/white"
-            app:layout_constraintStart_toEndOf="@id/layout_report_issue_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

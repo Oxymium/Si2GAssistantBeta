@@ -5,67 +5,75 @@
     android:id="@+id/navigation_graph_super_user"
     app:startDestination="@id/userFragment">
 
+    <!-- User -->
     <fragment
         android:id="@+id/userFragment"
         android:name="com.oxymium.si2gassistant.features.userlogin.UserFragment"
         android:label="UserFragment"
-        tools:layout="@layout/fragment_user"
-        >
-    </fragment>
+        tools:layout="@layout/fragment_user" />
 
+    <!-- Academies -->
     <fragment
         android:id="@+id/academiesFragment"
         android:name="com.oxymium.si2gassistant.features.academies.AcademiesFragment"
         android:label="AcademiesFragment"
         tools:layout="@layout/fragment_academies">
+
         <action
             android:id="@+id/action_academiesFragment_to_actorsFragment"
-            app:destination="@id/actorsFragment"
-            app:enterAnim="@anim/together"
-            app:exitAnim="@anim/together"
-            app:popEnterAnim="@anim/together"
-            app:popExitAnim="@anim/together" />
+            app:destination="@id/actorsFragment" />
+
     </fragment>
 
+    <!-- Actors -->
     <fragment
         android:id="@+id/actorsFragment"
         android:name="com.oxymium.si2gassistant.features.actors.ActorsFragment"
         android:label="ActorsFragment"
-        tools:layout="@layout/fragment_actors"
-        >
+        tools:layout="@layout/fragment_actors">
+
         <action
             android:id="@+id/action_actorsFragment_to_modulesFragment"
             app:destination="@id/modulesFragment" />
+
     </fragment>
 
-    <fragment
-        android:id="@+id/issuesFragment"
-        android:name="com.oxymium.si2gassistant.features.issues.IssuesFragment"
-        android:label="IssuesFragment"
-        tools:layout="@layout/fragment_issues"
-        >
-        <action
-            android:id="@+id/action_issuesFragment_to_issueFragment"
-            app:destination="@id/issueFragment" />
-    </fragment>
-
+    <!-- Modules -->
     <fragment
         android:id="@+id/modulesFragment"
         android:name="com.oxymium.si2gassistant.features.modules.ModulesFragment"
         android:label="ModulesFragment"
-        tools:layout="@layout/fragment_modules"/>
+        tools:layout="@layout/fragment_modules">
 
+    </fragment>
+
+    <!-- Issues -->
     <fragment
-        android:id="@+id/overviewFragment"
-        android:name="com.oxymium.si2gassistant.features.overview.OverviewFragment"
-        android:label="OverviewFragment"
-        tools:layout="@layout/fragment_overview"/>
+        android:id="@+id/issuesFragment"
+        android:name="com.oxymium.si2gassistant.features.issues.IssuesFragment"
+        android:label="IssuesFragment"
+        tools:layout="@layout/fragment_issues">
 
+        <action
+            android:id="@+id/action_issuesFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+
+    </fragment>
+
+    <!-- Issue -->
     <fragment
         android:id="@+id/issueFragment"
         android:name="com.oxymium.si2gassistant.features.issue.IssueFragment"
         android:label="IssueFragment"
         tools:layout="@layout/fragment_issue"
+        />
+
+    <!-- Overview -->
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.oxymium.si2gassistant.features.overview.OverviewFragment"
+        android:label="OverviewFragment"
+        tools:layout="@layout/fragment_overview"
         />
 
 </navigation>

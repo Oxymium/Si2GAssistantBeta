@@ -5,18 +5,42 @@
         <variable
             name="reportIssueViewModel"
             type="com.oxymium.si2gassistant.features.reportissue.ReportIssueViewModel"/>
-        <variable
-            name="navigationViewModel"
-            type="com.oxymium.si2gassistant.navigation.NavigationViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- DECORATION TOP -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent=".33"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:contentDescription="@string/corner_hexagonal_grid"
+                android:scaleX="1"
+                android:scaleY="-1"
+                android:src="@drawable/hexagonal_grid"
+                android:adjustViewBounds="true"
+                app:tint="@color/pewter_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- DECORATION BOTTOM -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/pewter_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_default="percent"
@@ -33,19 +57,22 @@
                 android:adjustViewBounds="true"
                 app:tint="@color/pewter_blue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- HEADER AREA -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_report_issue_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginStart="@dimen/items_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_body"
             >
 
             <include
@@ -54,128 +81,58 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_category"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_report_issue_category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/items_margin"
-                android:layout_marginEnd="@dimen/items_margin"
-                android:layout_marginTop="@dimen/items_margin"
-                app:startIconTint="@color/orange_700"
-                android:hint="@string/fragment_issue_category_hint"
-                app:hintTextColor="@color/orange_700"
-                app:startIconDrawable="@drawable/cursor_default_click"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- BODY AREA -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_report_issue_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_header"
+            >
+
+            <include
+                android:id="@+id/fragment_report_issue_body_include"
+                layout="@layout/layout_report_issue_body"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_header_include"
-                app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_gravity_field"
-                >
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fragment_add_actor_category_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={reportIssueViewModel.category}"
-                    android:textColor="@color/white"
-                    android:textAlignment="textStart"
-                    android:maxLines="5"
-                    android:inputType="textPersonName"
-                    android:background="@drawable/item_curved_shape"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+        <!-- BODY AREA -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_report_issue_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_body"
+            >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_report_issue_gravity_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/items_margin"
-                android:layout_marginEnd="@dimen/items_margin"
-                android:layout_marginTop="@dimen/items_margin"
-                android:layout_marginBottom="@dimen/items_margin"
-                android:background="@drawable/item_curved_shape"
+            <include
+                android:id="@+id/fragment_report_issue_upload_include"
+                layout="@layout/layout_report_issue_upload"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_gravity_field"
-                app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_description"
-                >
-
-                <com.google.android.material.slider.Slider
-                    android:id="@+id/fragment_report_issue_gravity_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:value="@={reportIssueViewModel.gravity}"
-                    android:layout_marginStart="@dimen/items_margin"
-                    android:layout_marginEnd="@dimen/items_margin"
-                    android:layout_marginTop="@dimen/items_margin"
-                    android:layout_marginBottom="@dimen/items_margin"
-                    android:valueFrom="1.0"
-                    android:valueTo="3.0"
-                    android:stepSize="1.0"
-                    app:labelBehavior="gone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/fragment_report_issue_gravity_picture"
-                    />
-
-                <ImageView
-                    android:id="@+id/fragment_report_issue_gravity_picture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/circles_critical_close"
-                    app:gravityImageView="@{reportIssueViewModel.gravity}"
-                    android:contentDescription="@string/item_issue_gravity_description"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_gravity_slider"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    app:gravityTextDescription="@{reportIssueViewModel.gravity}"
-                    android:hint="@string/gravity_level_1"
-                    android:textColorHint="@color/white"
-                    app:layout_constraintStart_toEndOf="@id/fragment_report_issue_gravity_picture"
-                    app:layout_constraintTop_toTopOf="@id/fragment_report_issue_gravity_picture"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_report_issue_gravity_picture"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_report_issue_description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/items_margin"
-                android:layout_marginEnd="@dimen/items_margin"
-                android:layout_marginTop="@dimen/items_margin"
-                app:startIconTint="@color/orange_700"
-                android:hint="@string/fragment_report_issue_description_hint"
-                app:hintTextColor="@color/orange_700"
-                app:startIconDrawable="@drawable/alphabetical_variant"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_report_issue_gravity_field"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fragment_add_actor_firstname_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={reportIssueViewModel.description}"
-                    android:textColor="@color/white"
-                    android:textAlignment="textStart"
-                    android:maxLines="5"
-                    android:inputType="textPersonName"
-                    android:background="@drawable/item_curved_shape"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

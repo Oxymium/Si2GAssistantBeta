@@ -48,6 +48,24 @@ class FirestoreIssuesImpl(val firebaseFirestore: FirebaseFirestore): IssuesRepos
         emit(State.failed(it.message.toString()))
     }
 
+    override suspend fun getIssueById(issueId: String) = flow<State<Issue?>> {
+
+        // LOADING
+        emit(State.loading())
+
+        firebaseFirestore
+            .collection(ISSUES)
+            .document(issueId)
+            .get()
+            .await()
+            .toObject(Issue::class.java)
+            .run { emit(State.success(this)) }
+
+    }.catch {
+        // FAILURE
+        emit(State.failed(it.message.toString()))
+    }
+
     override suspend fun getAllIssuesByAcademy(academyId: String) = flow<State<List<Issue>>> {
 
         // LOADING
@@ -76,7 +94,6 @@ class FirestoreIssuesImpl(val firebaseFirestore: FirebaseFirestore): IssuesRepos
             .document(documentId)
             .update("solved", true)
             .await()
-            .run { emit(State.success(this)) }
 
     }.catch {
 

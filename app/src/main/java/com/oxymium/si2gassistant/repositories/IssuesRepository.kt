@@ -17,6 +17,9 @@ interface IssuesRepository {
     // Query all issues
     suspend fun getAllIssues(): Flow<State<List<Issue>>>
 
+    // Get Issue
+    suspend fun getIssueById(issueId: String): Flow<State<Issue?>>
+
     // Query all issues from an Academy
     suspend fun getAllIssuesByAcademy(academyId: String): Flow<State<List<Issue>>>
 

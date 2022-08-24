@@ -4,8 +4,14 @@
 
     <data>
         <variable
+            name="moduleListener"
+            type="com.oxymium.si2gassistant.features.modules.ModuleListener"/>
+        <variable
             name="module"
             type="com.oxymium.si2gassistant.model.Module"/>
+        <variable
+            name="isSuperUser"
+            type="Boolean"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,68 +22,90 @@
         android:layout_marginTop="@dimen/items_margin"
         android:layout_marginBottom="@dimen/items_margin">
 
-        <!--  MODULE ITEM - TOP  -->
+        <!-- ITEM MODULE - TOP  -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_module_top"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#00FFFFFF"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/item_module_bottom">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!--  MODULE ITEM - BOTTOM  -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/item_module_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/item_curved_shape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/item_module_bottom" />
+
+        <!-- ITEM MODULE - BOTTOM  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_module_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_module_top"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!-- Icon -->
         <ImageView
-            android:id="@+id/item_module_hexagonal_icon"
+            android:id="@+id/item_module_icon"
+            android:paddingStart="@dimen/items_margin"
+            android:paddingEnd="@dimen/items_margin"
+            android:paddingTop="@dimen/items_margin"
+            android:paddingBottom="@dimen/items_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/items_margin"
-            android:layout_marginEnd="@dimen/items_margin"
-            android:layout_marginTop="@dimen/items_margin"
-            android:layout_marginBottom="@dimen/items_margin"
             android:src="@drawable/module_hexagonal"
             android:contentDescription="@string/module_hexagonal_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_module_top"
-            app:layout_constraintBottom_toTopOf="@id/item_module_bottom"/>
+            app:layout_constraintStart_toStartOf="@id/item_module_top"
+            app:layout_constraintTop_toTopOf="@id/item_module_check"
+            app:layout_constraintBottom_toBottomOf="@id/item_module_check"
+            />
 
+        <!-- Id -->
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/items_margin"
-            android:text="@{module.id}"
-            android:textColor="@color/white"
-            android:textAlignment="textStart"
-            android:hint="@string/item_actor_full_name_hint"
-            android:textColorHint="@color/white"
-            app:layout_constraintStart_toEndOf="@id/item_module_hexagonal_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:moduleValidatedColor="@{module.validated}"
-            android:src="@drawable/module_cross_hexagonal"
-            android:contentDescription="@string/check_hexagonal_description"
+            android:text="@{module.id}"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            android:hint="@string/item_module_id_hint"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@id/item_module_icon"
+            app:layout_constraintTop_toTopOf="@id/item_module_icon"
+            app:layout_constraintBottom_toBottomOf="@id/item_module_icon"
+            />
+
+        <!-- Cross  -->
+        <ImageView
+            android:id="@+id/item_module_cross"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> moduleListener.onClickModule(module) }"
+            app:moduleCrossVisibility="@{module.validated}"
+            app:disableModulesView="@{isSuperUser}"
+            android:src="@drawable/module_hexagonal_cross"
+            android:contentDescription="@string/module_hexagonal_close_description"
+            app:layout_constraintEnd_toStartOf="@id/item_module_check"
+            app:layout_constraintTop_toBottomOf="@id/item_module_top"
+            app:layout_constraintBottom_toBottomOf="@id/item_module_top"
+            />
+
+        <!-- Check  -->
+        <ImageView
+            android:id="@+id/item_module_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/items_margin"
+            android:layout_marginStart="@dimen/items_margin"
+            android:layout_marginTop="@dimen/items_margin"
+            android:layout_marginBottom="@dimen/items_margin"
+            android:onClick="@{ () -> moduleListener.onClickModule(module) }"
+            app:moduleCheckVisibility="@{module.validated}"
+            app:disableModulesView="@{isSuperUser}"
+            android:src="@drawable/module_hexagonal_check"
+            android:contentDescription="@string/module_hexagonal_check_description"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/item_module_top"
-            app:layout_constraintBottom_toBottomOf="@id/item_module_bottom"
+            app:layout_constraintTop_toBottomOf="@id/item_module_top"
+            app:layout_constraintBottom_toBottomOf="@id/item_module_top"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
